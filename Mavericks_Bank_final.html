@@ -1,0 +1,1487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Maverick Bank</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:       #0a0a0a;
+  --sidebar:  #111111;
+  --card:     #181818;
+  --card2:    #1e1e1e;
+  --input:    #222222;
+  --border:   rgba(255,255,255,0.08);
+  --border2:  rgba(255,255,255,0.05);
+  --cyan:     #00d4ff;
+  --cyan-dim: rgba(0,212,255,0.12);
+  --text:     #f2f2f2;
+  --muted:    #666;
+  --muted2:   #444;
+  --green:    #00e090;
+  --red:      #ff4560;
+  --gold:     #ffb730;
+  --purple:   #a78bfa;
+  --white:    #fff;
+  --shadow:   0 4px 24px rgba(0,0,0,0.6);
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html,body{height:100%;overflow:hidden;}
+body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(--text);font-size:14px;}
+
+/* ═══ LOGIN ═══ */
+#login-screen{
+  position:fixed;inset:0;z-index:999;
+  background:#000;
+  display:flex;align-items:center;justify-content:center;
+}
+.login-card{
+  width:400px;max-width:94vw;
+  background:#111;border:1px solid rgba(255,255,255,0.1);
+  border-radius:20px;padding:40px 36px;
+  box-shadow:0 32px 80px rgba(0,0,0,0.8);
+}
+.lc-logo{display:flex;align-items:center;gap:10px;margin-bottom:26px;}
+.lc-icon{
+  width:40px;height:40px;border-radius:10px;
+  background:var(--cyan);display:flex;align-items:center;justify-content:center;
+  font-weight:800;font-size:17px;color:#000;letter-spacing:0;
+}
+.lc-name{font-size:20px;font-weight:800;letter-spacing:1px;text-transform:uppercase;}
+.lc-sub{font-size:12px;color:var(--muted);margin-bottom:24px;}
+.lf{margin-bottom:14px;}
+.lf label{font-size:10px;font-weight:700;color:var(--muted);letter-spacing:1.2px;text-transform:uppercase;display:block;margin-bottom:5px;}
+.lf input{
+  width:100%;background:#1a1a1a;border:1px solid rgba(255,255,255,0.1);
+  border-radius:8px;padding:11px 13px;color:var(--text);font-size:13px;
+  font-family:'Plus Jakarta Sans',sans-serif;outline:none;transition:border-color .15s;
+}
+.lf input:focus{border-color:var(--cyan);}
+.lbtn{
+  width:100%;background:var(--cyan);color:#000;border:none;
+  border-radius:8px;padding:12px;font-size:13.5px;font-weight:700;
+  cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;margin-top:6px;
+  transition:all .18s;
+}
+.lbtn:hover{background:#33ddff;box-shadow:0 0 24px rgba(0,212,255,.35);}
+.lc-div{text-align:center;font-size:11px;color:var(--muted2);margin:14px 0;}
+.role-row{display:flex;gap:8px;}
+.rbtn{
+  flex:1;background:#1a1a1a;border:1px solid rgba(255,255,255,0.1);
+  color:var(--muted);border-radius:8px;padding:9px;font-size:12px;
+  cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;transition:all .15s;text-align:center;
+}
+.rbtn:hover{border-color:var(--cyan);color:var(--text);}
+
+/* ═══ SHELL ═══ */
+.shell{display:flex;height:100vh;}
+
+/* ═══ SIDEBAR ═══ */
+.sidebar{
+  width:240px;flex-shrink:0;
+  background:var(--sidebar);
+  border-right:1px solid var(--border);
+  display:flex;flex-direction:column;
+  padding-bottom:20px;
+}
+.sb-logo{
+  display:flex;align-items:center;gap:10px;
+  padding:20px 18px 18px;border-bottom:1px solid var(--border);
+}
+.sb-icon{
+  width:34px;height:34px;border-radius:9px;
+  background:var(--cyan);display:flex;align-items:center;justify-content:center;
+  font-weight:800;font-size:14px;color:#000;flex-shrink:0;
+}
+.sb-name{font-size:15px;font-weight:800;letter-spacing:1px;text-transform:uppercase;}
+.sb-sec{padding:18px 10px 0;}
+.sb-lbl{font-size:9.5px;font-weight:700;color:var(--muted2);letter-spacing:1.5px;text-transform:uppercase;padding:0 8px 8px;}
+.ni{
+  display:flex;align-items:center;gap:11px;
+  padding:10px 12px;border-radius:9px;
+  font-size:13px;font-weight:500;color:var(--muted);
+  cursor:pointer;transition:all .14s;margin-bottom:1px;
+  border-left:2px solid transparent;
+}
+.ni:hover{color:var(--text);background:rgba(255,255,255,.04);}
+.ni.act{
+  background:rgba(0,212,255,.1);color:var(--cyan);
+  border-left-color:var(--cyan);font-weight:600;
+}
+.ni-ic{font-size:15px;width:18px;text-align:center;opacity:.8;}
+.ni.act .ni-ic{opacity:1;}
+.ni-badge{margin-left:auto;background:var(--red);color:#fff;font-size:9px;font-weight:700;border-radius:20px;padding:1px 6px;}
+.sb-bottom{margin-top:auto;padding:0 10px;}
+.logout-ni{
+  display:flex;align-items:center;gap:11px;
+  padding:10px 12px;border-radius:9px;
+  font-size:13px;font-weight:500;color:var(--red);
+  cursor:pointer;transition:all .14s;
+}
+.logout-ni:hover{background:rgba(255,69,96,.08);}
+
+/* ═══ MAIN ═══ */
+.main{flex:1;display:flex;flex-direction:column;overflow:hidden;}
+
+/* ═══ TOPBAR ═══ */
+.topbar{
+  display:flex;align-items:center;gap:14px;
+  padding:14px 24px;border-bottom:1px solid var(--border);
+  background:var(--sidebar);flex-shrink:0;
+}
+.search-bar{
+  flex:1;max-width:380px;
+  background:#1a1a1a;border:1px solid rgba(255,255,255,0.09);
+  border-radius:22px;padding:9px 16px;
+  display:flex;align-items:center;gap:8px;
+}
+.search-bar input{
+  background:none;border:none;outline:none;color:var(--text);
+  font-size:13px;font-family:'Plus Jakarta Sans',sans-serif;flex:1;
+}
+.search-bar input::placeholder{color:var(--muted2);}
+.tb-r{display:flex;align-items:center;gap:14px;margin-left:auto;}
+.bell{position:relative;cursor:pointer;font-size:18px;color:var(--muted);}
+.bell:hover{color:var(--text);}
+.bell-dot{position:absolute;top:-1px;right:-1px;width:7px;height:7px;border-radius:50%;background:var(--cyan);border:2px solid var(--sidebar);}
+.user-area{display:flex;align-items:center;gap:10px;cursor:pointer;}
+.user-name-t{font-size:13px;font-weight:700;text-align:right;}
+.user-role-t{font-size:10px;color:var(--cyan);font-weight:600;text-align:right;}
+.user-av-t{
+  width:36px;height:36px;border-radius:50%;
+  background:linear-gradient(135deg,var(--cyan),#0088aa);
+  display:flex;align-items:center;justify-content:center;
+  font-weight:700;font-size:13px;color:#000;border:2px solid rgba(255,255,255,.1);
+}
+
+/* ═══ CONTENT ═══ */
+.content{flex:1;overflow-y:auto;padding:28px 24px;}
+::-webkit-scrollbar{width:4px;}
+::-webkit-scrollbar-track{background:transparent;}
+::-webkit-scrollbar-thumb{background:rgba(255,255,255,.08);border-radius:4px;}
+
+/* ═══ PAGES ═══ */
+.page{display:none;}
+.page.active{display:block;animation:pgIn .28s ease;}
+@keyframes pgIn{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:translateY(0);}}
+
+/* ═══ PAGE HEADER ═══ */
+.pgh{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:26px;flex-wrap:wrap;gap:12px;}
+.pgt{font-size:28px;font-weight:800;letter-spacing:-.5px;}
+.pgs{font-size:13px;color:var(--muted);margin-top:3px;}
+.pga{display:flex;gap:10px;align-items:center;}
+
+/* ═══ BUTTONS ═══ */
+.btn{
+  display:inline-flex;align-items:center;gap:6px;
+  border-radius:8px;padding:9px 18px;font-size:13px;font-weight:600;
+  cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;transition:all .16s;border:none;
+}
+.btn-ghost{background:rgba(255,255,255,.06);color:var(--text);border:1px solid rgba(255,255,255,.1);}
+.btn-ghost:hover{border-color:rgba(255,255,255,.2);background:rgba(255,255,255,.09);}
+.btn-primary{background:var(--cyan);color:#000;box-shadow:0 0 18px rgba(0,212,255,.25);}
+.btn-primary:hover{background:#33ddff;box-shadow:0 0 28px rgba(0,212,255,.4);transform:translateY(-1px);}
+.btn-sm{padding:6px 12px;font-size:11.5px;}
+.btn-danger{background:rgba(255,69,96,.12);color:var(--red);border:1px solid rgba(255,69,96,.2);}
+.btn-danger:hover{background:rgba(255,69,96,.2);}
+
+/* ═══ ACCOUNT CARDS (wireframe style) ═══ */
+.acct-cards-row{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:22px;}
+.acct-card{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:18px;padding:22px;position:relative;overflow:hidden;
+  transition:border-color .18s,transform .18s;cursor:pointer;
+}
+.acct-card:hover{border-color:rgba(255,255,255,.15);transform:translateY(-2px);}
+.acct-card.selected{border-color:var(--cyan);}
+.ac-blob{
+  position:absolute;top:-20px;right:-20px;
+  width:100px;height:100px;border-radius:50%;
+  filter:blur(30px);opacity:.18;pointer-events:none;
+}
+.ac-type-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;}
+.ac-type-badge{
+  font-size:10px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;
+  padding:3px 9px;border-radius:4px;
+}
+.badge-sav{color:#60a5fa;background:rgba(96,165,250,.12);}
+.badge-biz{color:var(--purple);background:rgba(167,139,250,.12);}
+.ac-icon{
+  width:34px;height:34px;border-radius:9px;
+  display:flex;align-items:center;justify-content:center;font-size:16px;
+}
+.ac-icon-sav{background:rgba(96,165,250,.15);}
+.ac-icon-biz{background:rgba(167,139,250,.15);}
+.ac-name{font-size:17px;font-weight:700;margin-bottom:10px;}
+.ac-balance{font-size:28px;font-weight:800;letter-spacing:-.5px;margin-bottom:6px;}
+.ac-num{font-size:11px;color:var(--muted);letter-spacing:1px;margin-bottom:14px;}
+.ac-meta{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:18px;}
+.ac-meta-item .aml{font-size:9.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.8px;margin-bottom:2px;}
+.ac-meta-item .amv{font-size:12.5px;font-weight:600;}
+.ac-btns{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+.ac-btn{
+  padding:10px;border-radius:9px;font-size:12.5px;font-weight:600;
+  text-align:center;cursor:pointer;transition:all .15s;font-family:'Plus Jakarta Sans',sans-serif;border:none;
+}
+.ac-btn-det{background:rgba(0,212,255,.15);color:var(--cyan);}
+.ac-btn-det:hover{background:rgba(0,212,255,.25);}
+.ac-btn-tr{background:#222;color:var(--text);border:1px solid rgba(255,255,255,.1);}
+.ac-btn-tr:hover{background:#2a2a2a;border-color:rgba(255,255,255,.2);}
+
+/* ═══ BOTTOM ROW: Account Info + Transactions ═══ */
+.acct-bottom{display:grid;grid-template-columns:1fr 2fr;gap:16px;}
+
+/* Account Info Panel */
+.acct-info-panel{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:22px;}
+.aip-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;}
+.aip-title{font-size:16px;font-weight:700;}
+.aip-more{font-size:18px;color:var(--muted);cursor:pointer;line-height:1;}
+.aip-row{display:flex;align-items:center;justify-content:space-between;padding:12px 0;border-bottom:1px solid var(--border2);}
+.aip-row:last-child{border-bottom:none;}
+.aip-lbl{font-size:12.5px;color:var(--muted);}
+.aip-val{font-size:12.5px;font-weight:600;text-align:right;}
+.status-pill{
+  background:rgba(0,224,144,.12);color:var(--green);
+  border-radius:20px;padding:3px 10px;font-size:11px;font-weight:700;
+}
+.status-pill.inactive{background:rgba(255,69,96,.12);color:var(--red);}
+
+/* Recent Transactions Panel */
+.txn-panel{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:22px;}
+.txn-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;flex-wrap:wrap;gap:10px;}
+.txn-title{font-size:16px;font-weight:700;}
+.txn-tabs{display:flex;gap:4px;}
+.txn-tab{
+  padding:6px 14px;border-radius:7px;font-size:12px;font-weight:600;
+  cursor:pointer;border:1px solid var(--border);color:var(--muted);
+  transition:all .14s;background:transparent;font-family:'Plus Jakarta Sans',sans-serif;
+}
+.txn-tab.act{background:var(--cyan);color:#000;border-color:var(--cyan);}
+.txn-tab:hover:not(.act){color:var(--text);border-color:rgba(255,255,255,.15);}
+.txn-col-hd{display:grid;grid-template-columns:160px 80px 1fr 110px 100px;gap:8px;padding:0 0 9px;border-bottom:1px solid var(--border);font-size:10.5px;color:var(--muted);font-weight:600;letter-spacing:.5px;text-transform:uppercase;}
+.txn-row{display:grid;grid-template-columns:160px 80px 1fr 110px 100px;gap:8px;padding:11px 0;border-bottom:1px solid var(--border2);align-items:center;}
+.txn-row:last-child{border-bottom:none;}
+.txn-date{font-size:12px;color:var(--text);}
+.txn-date-sub{font-size:10px;color:var(--muted);}
+.txn-type-dot{
+  width:28px;height:28px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;font-size:12px;
+}
+.dot-cr{background:rgba(0,224,144,.15);}
+.dot-db{background:rgba(255,69,96,.12);}
+.txn-desc{font-size:12.5px;font-weight:600;}
+.txn-desc-sub{font-size:10px;color:var(--muted);}
+.txn-amt{font-size:13px;font-weight:700;text-align:right;}
+.txn-amt.cr{color:var(--green);}
+.txn-amt.db{color:var(--red);}
+.txn-bal{font-size:12.5px;font-weight:600;text-align:right;color:var(--text);}
+
+/* ═══ DASHBOARD ═══ */
+.dash-grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;}
+.dash-grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-bottom:16px;}
+.dash-grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:16px;}
+.stat-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:18px;transition:transform .18s;}
+.stat-card:hover{transform:translateY(-2px);}
+.sc-l{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.8px;margin-bottom:8px;font-weight:600;}
+.sc-v{font-size:22px;font-weight:800;letter-spacing:-.3px;}
+.sc-v.g{color:var(--green);}
+.sc-v.r{color:var(--red);}
+.sc-v.c{color:var(--cyan);}
+.sc-v.o{color:var(--gold);}
+.sc-ch{font-size:11px;margin-top:4px;}
+.sc-ch.up{color:var(--green);}
+.sc-ch.dn{color:var(--red);}
+.panel{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:22px;}
+.ph{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;}
+.pt{font-size:15px;font-weight:700;}
+.pl{font-size:12px;color:var(--cyan);cursor:pointer;font-weight:600;}
+
+/* Balance card */
+.balance-card{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:18px;padding:26px;position:relative;overflow:hidden;
+}
+.balance-card::after{
+  content:'';position:absolute;top:-30px;right:-30px;
+  width:130px;height:130px;border-radius:50%;
+  background:radial-gradient(circle,rgba(0,212,255,.1) 0%,transparent 70%);
+}
+.bc-lbl{font-size:12px;color:var(--muted);margin-bottom:8px;font-weight:500;}
+.bc-amt{font-size:38px;font-weight:800;letter-spacing:-1px;color:var(--cyan);}
+.bc-tag{display:inline-flex;align-items:center;gap:5px;background:rgba(0,224,144,.12);color:var(--green);border-radius:20px;padding:4px 10px;font-size:12px;font-weight:600;margin-top:10px;}
+.bc-ic{position:absolute;top:26px;right:26px;width:40px;height:40px;border-radius:50%;background:rgba(0,212,255,.12);display:flex;align-items:center;justify-content:center;font-size:18px;}
+
+/* Virtual card */
+.vcard{
+  background:linear-gradient(145deg,#1a1a1a,#0f0f0f);
+  border:1px solid rgba(255,255,255,.1);
+  border-radius:18px;padding:22px;position:relative;overflow:hidden;min-height:168px;
+}
+.vcard::before{
+  content:'';position:absolute;inset:0;
+  background:repeating-linear-gradient(-45deg,rgba(255,255,255,.015) 0,rgba(255,255,255,.015) 1px,transparent 1px,transparent 14px);
+}
+.vc-top{display:flex;justify-content:space-between;margin-bottom:20px;position:relative;}
+.vc-circles{display:flex;}
+.vc-c{width:28px;height:28px;border-radius:50%;background:rgba(255,255,255,.18);}
+.vc-c:last-child{margin-left:-10px;background:rgba(255,255,255,.32);}
+.vc-num{font-size:15px;font-weight:600;letter-spacing:2px;margin-bottom:14px;position:relative;}
+.vc-bot{display:grid;grid-template-columns:1fr 1fr;position:relative;}
+.vc-fl{font-size:8.5px;color:rgba(255,255,255,.4);letter-spacing:1px;text-transform:uppercase;margin-bottom:2px;}
+.vc-fv{font-size:12.5px;font-weight:700;}
+
+/* Quick transfer */
+.qt-people{display:flex;gap:16px;flex-wrap:wrap;}
+.qt-p{display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer;}
+.qt-av{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:#000;transition:transform .15s,box-shadow .15s;}
+.qt-av:hover{transform:scale(1.1);box-shadow:0 0 14px rgba(0,212,255,.3);}
+.qt-add{width:44px;height:44px;border-radius:50%;border:2px dashed rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;font-size:18px;color:var(--muted);cursor:pointer;transition:all .15s;}
+.qt-add:hover{border-color:var(--cyan);color:var(--cyan);}
+.qt-n{font-size:10px;color:var(--muted);font-weight:500;}
+
+/* Savings goal */
+.goal-card{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:22px;}
+.gc-h{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;}
+.gc-t{font-size:15px;font-weight:700;}
+.gc-amt{font-size:26px;font-weight:800;letter-spacing:-.5px;}
+.gc-of{font-size:11px;color:var(--muted);margin-top:2px;}
+.gc-pw{background:rgba(255,255,255,.07);border-radius:20px;height:5px;margin:14px 0 5px;}
+.gc-pf{height:100%;border-radius:20px;background:linear-gradient(90deg,var(--cyan),#0099bb);}
+.gc-pct{font-size:13px;font-weight:700;color:var(--cyan);text-align:right;margin-bottom:12px;}
+.gc-tip{background:#1a1a1a;border-radius:10px;padding:11px 13px;display:flex;align-items:center;gap:10px;}
+.gc-em{width:30px;height:30px;border-radius:50%;background:rgba(0,212,255,.12);display:flex;align-items:center;justify-content:center;font-size:14px;}
+
+/* Spendings chart */
+.sp-bars{display:flex;align-items:flex-end;gap:8px;height:80px;}
+.sp-bw{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;}
+.sp-b{width:100%;border-radius:5px 5px 0 0;}
+.sp-m{font-size:9px;color:var(--muted);}
+
+/* Donut chart */
+.donut-wrap{display:flex;align-items:center;gap:18px;}
+.dleg{display:flex;flex-direction:column;gap:8px;}
+.dli{display:flex;align-items:center;gap:7px;font-size:12px;}
+.dd{width:9px;height:9px;border-radius:50%;flex-shrink:0;}
+
+/* ═══ TRANSFER PAGE ═══ */
+.tf-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;}
+.amt-disp{font-size:44px;font-weight:800;letter-spacing:-1px;color:var(--cyan);text-align:center;padding:18px 0 8px;}
+.numpad{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:12px 0;}
+.npk{
+  background:#1a1a1a;border:1px solid rgba(255,255,255,.08);
+  border-radius:9px;padding:14px;text-align:center;font-size:16px;font-weight:700;
+  cursor:pointer;transition:all .12s;user-select:none;
+}
+.npk:hover{background:rgba(0,212,255,.12);border-color:var(--cyan);color:var(--cyan);}
+.npk.np-del{color:var(--red);}
+.npk.np-ok{background:var(--cyan);color:#000;border-color:var(--cyan);}
+
+/* ═══ DEPOSIT PAGE ═══ */
+.dep-methods{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:18px;}
+.dep-m{background:#1a1a1a;border:1.5px solid rgba(255,255,255,.08);border-radius:12px;padding:16px;text-align:center;cursor:pointer;transition:all .15s;}
+.dep-m.sel{border-color:var(--cyan);background:rgba(0,212,255,.07);}
+.dep-m:hover{border-color:rgba(255,255,255,.18);}
+.dm-ic{font-size:22px;margin-bottom:7px;}
+.dm-lb{font-size:12px;font-weight:600;}
+
+/* ═══ LOAN CARD ═══ */
+.loan-card{background:#1a1a1a;border:1px solid rgba(255,255,255,.07);border-radius:14px;padding:16px;margin-bottom:12px;}
+.loan-card:last-child{margin-bottom:0;}
+.lct{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px;}
+.lc-tp{font-size:14px;font-weight:700;}
+.prog{background:rgba(255,255,255,.07);border-radius:20px;height:4px;}
+.prog-f{height:100%;border-radius:20px;background:linear-gradient(90deg,var(--cyan),#006688);}
+.lm{display:flex;justify-content:space-between;margin-top:8px;}
+.lml{font-size:10px;color:var(--muted);}
+.lmv{font-size:12px;font-weight:600;}
+
+/* ═══ FORM ═══ */
+.field{margin-bottom:14px;}
+.field label{font-size:10px;font-weight:700;color:var(--muted);letter-spacing:1.1px;text-transform:uppercase;display:block;margin-bottom:5px;}
+.field input,.field select,.field textarea{
+  width:100%;background:#1a1a1a;border:1px solid rgba(255,255,255,.1);
+  border-radius:9px;padding:10px 13px;color:var(--text);font-size:13px;
+  font-family:'Plus Jakarta Sans',sans-serif;outline:none;transition:border-color .14s;
+}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--cyan);}
+.field select option{background:#1a1a1a;}
+.field textarea{resize:vertical;min-height:68px;}
+.fg2{display:grid;grid-template-columns:1fr 1fr;gap:13px;}
+.fg3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:13px;}
+input[readonly]{opacity:.7;cursor:default;}
+
+/* ═══ TABLE ═══ */
+.tbl{width:100%;border-collapse:collapse;font-size:12.5px;}
+.tbl th{font-size:10px;color:var(--muted);letter-spacing:.8px;text-transform:uppercase;padding:0 0 10px;text-align:left;border-bottom:1px solid var(--border);}
+.tbl td{padding:11px 0;border-bottom:1px solid var(--border2);vertical-align:middle;}
+.tbl tr:last-child td{border-bottom:none;}
+
+/* ═══ CHIPS ═══ */
+.chip{display:inline-block;padding:3px 9px;border-radius:5px;font-size:11px;font-weight:700;}
+.ch-sav{background:rgba(96,165,250,.12);color:#60a5fa;}
+.ch-biz{background:rgba(167,139,250,.12);color:var(--purple);}
+.ch-act{background:rgba(0,224,144,.1);color:var(--green);}
+.ch-pen{background:rgba(255,183,48,.12);color:var(--gold);}
+.ch-rej{background:rgba(255,69,96,.1);color:var(--red);}
+.ch-per{background:rgba(0,212,255,.1);color:var(--cyan);}
+
+/* ═══ DB SCHEMA ═══ */
+.db-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
+.db-t{background:var(--card);border:1px solid rgba(255,255,255,.1);border-radius:14px;overflow:hidden;}
+.db-h{background:rgba(255,255,255,.04);border-bottom:1px solid rgba(255,255,255,.07);padding:10px 14px;font-weight:700;font-size:13px;display:flex;align-items:center;gap:7px;}
+.db-b{padding:8px 14px 12px;}
+.db-r{display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid rgba(255,255,255,.04);font-size:11.5px;}
+.db-r:last-child{border-bottom:none;}
+.pk-f{color:var(--gold);}
+.fk-f{color:var(--cyan);}
+.dbt{font-size:9.5px;color:var(--muted);}
+
+/* ═══ MODAL ═══ */
+.modal-bg{
+  position:fixed;inset:0;background:rgba(0,0,0,.88);
+  backdrop-filter:blur(6px);z-index:300;
+  display:flex;align-items:center;justify-content:center;
+  opacity:0;pointer-events:none;transition:opacity .22s;
+}
+.modal-bg.open{opacity:1;pointer-events:all;}
+.modal{
+  background:#111;border:1px solid rgba(255,255,255,.12);
+  border-radius:20px;padding:28px;width:420px;max-width:93vw;
+  box-shadow:0 24px 80px rgba(0,0,0,.85);
+  transform:translateY(16px);transition:transform .22s;
+}
+.modal-bg.open .modal{transform:translateY(0);}
+.modal-title{font-size:17px;font-weight:800;margin-bottom:20px;letter-spacing:-.3px;}
+.mact{display:flex;gap:8px;margin-top:8px;}
+.btn-cancel{flex:1;background:#1a1a1a;border:1px solid rgba(255,255,255,.1);color:var(--muted);border-radius:9px;padding:11px;font-size:13px;font-weight:600;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;}
+.btn-confirm{flex:2;background:var(--cyan);color:#000;border:none;border-radius:9px;padding:11px;font-size:13px;font-weight:700;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;display:flex;align-items:center;justify-content:center;gap:5px;}
+.btn-confirm:hover{background:#33ddff;}
+
+/* ═══ SUCCESS ═══ */
+.succ{text-align:center;padding:18px 0;}
+.succ-ic{width:60px;height:60px;border-radius:50%;background:rgba(0,224,144,.12);display:flex;align-items:center;justify-content:center;font-size:26px;margin:0 auto 14px;}
+
+/* Emp card */
+.emp-card{background:#1a1a1a;border:1px solid rgba(255,255,255,.07);border-radius:14px;padding:16px;display:flex;align-items:flex-start;gap:13px;}
+.emp-av{width:46px;height:46px;border-radius:50%;background:linear-gradient(135deg,var(--cyan),#006688);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:16px;color:#000;flex-shrink:0;}
+.emp-n{font-size:14px;font-weight:700;}
+.emp-r{font-size:11px;color:var(--muted);margin-top:2px;}
+.emp-m{display:flex;gap:14px;margin-top:10px;flex-wrap:wrap;}
+.emi .eml{font-size:9.5px;color:var(--muted);}
+.emi .emv{font-size:12px;font-weight:600;}
+
+/* tx item */
+.txi{display:flex;align-items:center;gap:11px;padding:10px 0;border-bottom:1px solid var(--border2);}
+.txi:last-child{border-bottom:none;}
+.txii{width:38px;height:38px;border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;}
+.txii.cr{background:rgba(0,224,144,.1);}
+.txii.db{background:rgba(255,69,96,.1);}
+.txii.tr{background:rgba(0,212,255,.08);}
+.txi-b{flex:1;}
+.txi-n{font-size:12.5px;font-weight:600;}
+.txi-s{font-size:10.5px;color:var(--muted);margin-top:1px;}
+.txi-a{font-size:13px;font-weight:800;}
+.txi-a.cr{color:var(--green);}
+.txi-a.db{color:var(--red);}
+</style>
+</head>
+<body>
+
+<!-- ══════════ LOGIN ══════════ -->
+<div id="login-screen">
+  <div class="login-card">
+    <div class="lc-logo">
+      <div class="lc-icon">M</div>
+      <div class="lc-name">Maverick</div>
+    </div>
+    <div class="lc-sub">Sign in to your banking dashboard</div>
+    <div class="lf"><label>Email / Username</label><input type="text" placeholder="dhakshna@maverickbank.in"></div>
+    <div class="lf"><label>Password</label><input type="password" placeholder="••••••••"></div>
+    <button class="lbtn" onclick="doLogin('customer')">Sign In</button>
+    <div class="lc-div">— or continue as —</div>
+    <div class="role-row">
+      <button class="rbtn" onclick="doLogin('employee')">🏦 Employee</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ MAIN APP ══════════ -->
+<div class="shell" id="main-app" style="display:none;">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sb-logo">
+      <div class="sb-icon">M</div>
+      <div class="sb-name">Maverick</div>
+    </div>
+    <div id="sb-cust">
+      <div class="sb-sec">
+        <div class="ni act" onclick="nav('dashboard')"><span class="ni-ic">⊞</span> Dashboard</div>
+        <div class="ni" onclick="nav('accounts')"><span class="ni-ic">💳</span> Accounts</div>
+        <div class="ni" onclick="nav('transfer')"><span class="ni-ic">⇄</span> Transfers</div>
+        <div class="ni" onclick="nav('deposit')"><span class="ni-ic">↓</span> Deposit</div>
+        <div class="ni" onclick="nav('analytics')"><span class="ni-ic">◑</span> Analytics</div>
+        <div class="ni" onclick="nav('loans')"><span class="ni-ic">⬙</span> Loans <span class="ni-badge">2</span></div>
+      </div>
+      <div class="sb-sec">
+        <div class="sb-lbl">Settings</div>
+        <div class="ni" onclick="nav('profile')"><span class="ni-ic">◯</span> Profile</div>
+      </div>
+    </div>
+    <div id="sb-emp" style="display:none;">
+      <div class="sb-sec">
+        <div class="ni act" onclick="nav('emp-dash')"><span class="ni-ic">⊞</span> Dashboard</div>
+        <div class="ni" onclick="nav('emp-accounts')"><span class="ni-ic">💳</span> Accounts</div>
+        <div class="ni" onclick="nav('emp-loans')"><span class="ni-ic">⬙</span> Loan Review</div>
+        <div class="ni" onclick="nav('emp-txns')"><span class="ni-ic">⇄</span> Transactions</div>
+      </div>
+    </div>
+    <div id="sb-admin" style="display:none;">
+      <div class="sb-sec">
+        <div class="ni act" onclick="nav('admin-dash')"><span class="ni-ic">⊞</span> Dashboard</div>
+        <div class="ni" onclick="nav('admin-users')"><span class="ni-ic">◯</span> Users</div>
+        <div class="ni" onclick="nav('db-schema')"><span class="ni-ic">⊟</span> DB Schema</div>
+      </div>
+    </div>
+    <div class="sb-bottom">
+      <div class="logout-ni" onclick="logout()"><span>⇥</span> Logout</div>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <div class="main">
+    <div class="topbar">
+      <div class="search-bar">
+        <span style="color:var(--muted2);font-size:15px;">🔍</span>
+        <input type="text" placeholder="Search transactions, accounts...">
+      </div>
+      <div class="tb-r">
+        <div class="bell">🔔<div class="bell-dot"></div></div>
+        <div class="user-area">
+          <div style="text-align:right;">
+            <div class="user-name-t" id="tb-name">Dhakshna</div>
+            <div class="user-role-t" id="tb-role">Premium</div>
+          </div>
+          <div class="user-av-t" id="tb-av">DK</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="content">
+
+      <!-- ━━━━ DASHBOARD ━━━━ -->
+      <div class="page active" id="pg-dashboard">
+        <div class="pgh">
+          <div><div class="pgt">Dashboard</div><div class="pgs">Welcome back, here's your financial overview.</div></div>
+          <div class="pga">
+            <button class="btn btn-ghost" onclick="nav('deposit')">+ Add Money</button>
+            <button class="btn btn-primary" onclick="nav('transfer')">✈ Transfer</button>
+          </div>
+        </div>
+        <div class="dash-grid4">
+          <div class="stat-card"><div class="sc-l">Total Balance</div><div class="sc-v c">₹8,28,250</div><div class="sc-ch up">↑ 4.2% vs last month</div></div>
+          <div class="stat-card"><div class="sc-l">Inflow · Mar</div><div class="sc-v g">₹1,24,500</div><div class="sc-ch up">↑ 8.1%</div></div>
+          <div class="stat-card"><div class="sc-l">Outflow · Mar</div><div class="sc-v r">₹42,300</div><div class="sc-ch dn">↑ 2.3%</div></div>
+          <div class="stat-card"><div class="sc-l">Active Loans</div><div class="sc-v o">₹6,50,000</div><div class="sc-ch" style="color:var(--muted)">2 active</div></div>
+        </div>
+        <div class="dash-grid2">
+          <div class="balance-card">
+            <div class="bc-ic">💳</div>
+            <div class="bc-lbl">Total Balance</div>
+            <div class="bc-amt">₹8,28,250.00</div>
+            <div class="bc-tag">↑ +₹12,340 vs last month</div>
+          </div>
+          <div class="vcard">
+            <div class="vc-top">
+              <div class="vc-circles"><div class="vc-c"></div><div class="vc-c"></div></div>
+              <div style="font-size:16px;color:rgba(255,255,255,.4);position:relative;">◉</div>
+            </div>
+            <div class="vc-num">**** **** **** 4821</div>
+            <div class="vc-bot">
+              <div><div class="vc-fl">Card Holder</div><div class="vc-fv" id="vc-name">DHAKSHNA D.</div></div>
+              <div><div class="vc-fl">Expires</div><div class="vc-fv">03/29</div></div>
+            </div>
+          </div>
+        </div>
+        <div class="dash-grid2">
+          <div class="goal-card">
+            <div class="gc-h"><div class="gc-t">Savings Goal</div><span style="color:var(--muted);font-size:18px;cursor:pointer">···</span></div>
+            <div class="gc-amt">₹9,715.50</div>
+            <div class="gc-of">of ₹15,000 goal</div>
+            <div class="gc-pw"><div class="gc-pf" style="width:64%"></div></div>
+            <div class="gc-pct">64%</div>
+            <div class="gc-tip">
+              <div class="gc-em">😊</div>
+              <div><div style="font-size:13px;font-weight:600;">You're doing great!</div><div style="font-size:10.5px;color:var(--muted);margin-top:2px;">On track to hit goal by Dec.</div></div>
+            </div>
+          </div>
+          <div class="panel">
+            <div class="ph"><div class="pt">Quick Transfer</div><div class="pl" onclick="nav('transfer')">View all</div></div>
+            <div class="qt-people">
+              <div class="qt-p" onclick="openQT('Priya K.')"><div class="qt-av" style="background:linear-gradient(135deg,var(--cyan),#006688)">PK</div><div class="qt-n">Priya K.</div></div>
+              <div class="qt-p" onclick="openQT('Ravi V.')"><div class="qt-av" style="background:linear-gradient(135deg,#f87171,#991b1b)">RV</div><div class="qt-n">Ravi V.</div></div>
+              <div class="qt-p" onclick="openQT('Suresh K.')"><div class="qt-av" style="background:linear-gradient(135deg,var(--green),#006644)">SK</div><div class="qt-n">Suresh K.</div></div>
+              <div class="qt-p" onclick="openQT('Mom')"><div class="qt-av" style="background:linear-gradient(135deg,var(--gold),#996600)">MK</div><div class="qt-n">Mom</div></div>
+              <div class="qt-p"><div class="qt-add">+</div><div class="qt-n">Add</div></div>
+            </div>
+          </div>
+        </div>
+        <div class="panel">
+          <div class="ph"><div class="pt">Recent Transactions</div><div class="pl" onclick="nav('analytics')">View all →</div></div>
+          <div id="dash-txns"></div>
+        </div>
+      </div>
+
+      <!-- ━━━━ ACCOUNTS (exact wireframe) ━━━━ -->
+      <div class="page" id="pg-accounts">
+        <div class="pgh">
+          <div><div class="pgt">Accounts</div><div class="pgs">Manage and view all your bank accounts</div></div>
+          <div class="pga">
+            <button class="btn btn-ghost" onclick="openModal('modal-bene')">👤+ Add Beneficiary</button>
+            <button class="btn btn-primary" onclick="openModal('modal-open-acct')">+ New Account</button>
+          </div>
+        </div>
+
+        <!-- Account Cards Row -->
+        <div class="acct-cards-row">
+          <!-- Savings -->
+          <div class="acct-card selected" onclick="selectCard(this,'sav')" id="card-sav">
+            <div class="ac-blob" style="background:var(--cyan);"></div>
+            <div class="ac-type-row">
+              <span class="ac-type-badge badge-sav">SAVINGS</span>
+              <div class="ac-icon ac-icon-sav">🐷</div>
+            </div>
+            <div class="ac-name">Dhakshna D.</div>
+            <div class="ac-balance">₹2,47,850.00</div>
+            <div class="ac-num">**** **** **** 4821</div>
+            <div class="ac-meta">
+              <div class="ac-meta-item"><div class="aml">IFSC</div><div class="amv">MVRK0004821</div></div>
+              <div class="ac-meta-item"><div class="aml">Branch</div><div class="amv">Anna Nagar</div></div>
+            </div>
+            <div class="ac-btns">
+              <button class="ac-btn ac-btn-det" onclick="event.stopPropagation();selectCard(document.getElementById('card-sav'),'sav')">Details</button>
+              <button class="ac-btn ac-btn-tr" onclick="event.stopPropagation();nav('transfer')">Transfer</button>
+            </div>
+          </div>
+          <!-- Business -->
+          <div class="acct-card" onclick="selectCard(this,'biz')" id="card-biz">
+            <div class="ac-blob" style="background:var(--purple);"></div>
+            <div class="ac-type-row">
+              <span class="ac-type-badge badge-biz">BUSINESS</span>
+              <div class="ac-icon ac-icon-biz">💼</div>
+            </div>
+            <div class="ac-name">Dhakshna Enterprises</div>
+            <div class="ac-balance">₹5,12,000.00</div>
+            <div class="ac-num">**** **** **** 1205</div>
+            <div class="ac-meta">
+              <div class="ac-meta-item"><div class="aml">IFSC</div><div class="amv">MVRK0001205</div></div>
+              <div class="ac-meta-item"><div class="aml">Branch</div><div class="amv">Guindy</div></div>
+            </div>
+            <div class="ac-btns">
+              <button class="ac-btn ac-btn-det" onclick="event.stopPropagation();selectCard(document.getElementById('card-biz'),'biz')">Details</button>
+              <button class="ac-btn ac-btn-tr" onclick="event.stopPropagation();nav('transfer')">Transfer</button>
+            </div>
+          </div>
+          <!-- Add new placeholder -->
+          <div class="acct-card" style="border-style:dashed;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;cursor:pointer;min-height:280px;" onclick="openModal('modal-open-acct')">
+            <div style="width:48px;height:48px;border-radius:50%;border:2px dashed rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;font-size:22px;color:var(--muted);">+</div>
+            <div style="font-size:13px;color:var(--muted);font-weight:600;">Open New Account</div>
+          </div>
+        </div>
+
+        <!-- Bottom: Info + Transactions -->
+        <div class="acct-bottom">
+          <!-- Account Info -->
+          <div class="acct-info-panel">
+            <div class="aip-header">
+              <div class="aip-title">Account Info</div>
+              <div class="aip-more">···</div>
+            </div>
+            <div id="acct-info-rows"></div>
+          </div>
+          <!-- Recent Transactions -->
+          <div class="txn-panel">
+            <div class="txn-header">
+              <div class="txn-title">Recent Transactions</div>
+              <div class="txn-tabs">
+                <button class="txn-tab act" onclick="setTxnTab(this,'10')">Last 10</button>
+                <button class="txn-tab" onclick="setTxnTab(this,'month')">Last Month</button>
+                <button class="txn-tab" onclick="setTxnTab(this,'custom')">Custom</button>
+              </div>
+            </div>
+            <div id="custom-date-row" style="display:none;margin-bottom:12px;">
+              <div class="fg2">
+                <div class="field"><label>From</label><input type="date"></div>
+                <div class="field"><label>To</label><input type="date"></div>
+              </div>
+              <button class="btn btn-primary btn-sm">Apply</button>
+            </div>
+            <div class="txn-col-hd">
+              <span>Date</span><span>Type</span><span>Description</span><span>Amount</span><span>Balance</span>
+            </div>
+            <div id="acct-txns"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ━━━━ TRANSFER ━━━━ -->
+      <div class="page" id="pg-transfer">
+        <div class="pgh">
+          <div><div class="pgt">Transfers</div><div class="pgs">Send money securely to any account</div></div>
+        </div>
+        <div class="tf-grid">
+          <div>
+            <div class="panel" style="margin-bottom:16px;">
+              <div class="pt" style="margin-bottom:16px;">Transfer Details</div>
+              <div class="field"><label>From Account</label>
+                <select id="tf-from">
+                  <option>Savings ••4821 — ₹2,47,850</option>
+                  <option>Business ••1205 — ₹5,12,000</option>
+                </select>
+              </div>
+              <div class="field"><label>Beneficiary</label>
+                <select id="tf-to">
+                  <option>Priya K. — HDFC ••2311</option>
+                  <option>Ravi V. — ICICI ••7782</option>
+                  <option>Suresh K. — Axis ••4411</option>
+                  <option>Mom — SBI ••9901</option>
+                  <option>+ New Beneficiary</option>
+                </select>
+              </div>
+              <div class="field"><label>Amount (₹)</label><input type="number" id="tf-amount" placeholder="0.00" oninput="syncAmt()"></div>
+              <div class="field"><label>Remarks</label><input type="text" placeholder="Optional note..."></div>
+              <button class="btn btn-primary" style="width:100%;justify-content:center;padding:12px;" onclick="doTransfer()">✈ Confirm Transfer</button>
+            </div>
+            <div class="panel">
+              <div class="pt" style="margin-bottom:14px;">Quick Beneficiaries</div>
+              <div class="qt-people">
+                <div class="qt-p" onclick="setTfTo('Priya K. — HDFC ••2311')"><div class="qt-av" style="background:linear-gradient(135deg,var(--cyan),#006688)">PK</div><div class="qt-n">Priya K.</div></div>
+                <div class="qt-p" onclick="setTfTo('Ravi V. — ICICI ••7782')"><div class="qt-av" style="background:linear-gradient(135deg,#f87171,#991b1b)">RV</div><div class="qt-n">Ravi V.</div></div>
+                <div class="qt-p" onclick="setTfTo('Suresh K. — Axis ••4411')"><div class="qt-av" style="background:linear-gradient(135deg,var(--green),#006644)">SK</div><div class="qt-n">Suresh K.</div></div>
+                <div class="qt-p" onclick="setTfTo('Mom — SBI ••9901')"><div class="qt-av" style="background:linear-gradient(135deg,var(--gold),#996600)">MK</div><div class="qt-n">Mom</div></div>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div class="panel" style="margin-bottom:16px;">
+              <div class="pt" style="margin-bottom:4px;text-align:center;">Enter Amount</div>
+              <div class="amt-disp" id="amt-disp">₹0</div>
+              <div class="numpad">
+                <div class="npk" onclick="np('1')">1</div><div class="npk" onclick="np('2')">2</div><div class="npk" onclick="np('3')">3</div>
+                <div class="npk" onclick="np('4')">4</div><div class="npk" onclick="np('5')">5</div><div class="npk" onclick="np('6')">6</div>
+                <div class="npk" onclick="np('7')">7</div><div class="npk" onclick="np('8')">8</div><div class="npk" onclick="np('9')">9</div>
+                <div class="npk" onclick="np('C')">C</div><div class="npk" onclick="np('0')">0</div><div class="npk np-del" onclick="np('⌫')">⌫</div>
+              </div>
+              <button class="btn btn-primary" style="width:100%;justify-content:center;padding:12px;" onclick="doTransfer()">Confirm →</button>
+            </div>
+            <div class="panel">
+              <div class="pt" style="margin-bottom:14px;">Transaction Summary</div>
+              <div class="txi"><div class="txii tr">⇄</div><div class="txi-b"><div class="txi-n">Type</div><div class="txi-s">Immediate NEFT</div></div><div style="font-size:12px;color:var(--muted)">₹0 fee</div></div>
+              <div class="txi"><div class="txii cr">🛡</div><div class="txi-b"><div class="txi-n">Security</div><div class="txi-s">JWT Authenticated</div></div><span class="chip ch-act">Secure</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ━━━━ DEPOSIT ━━━━ -->
+      <div class="page" id="pg-deposit">
+        <div class="pgh"><div><div class="pgt">Add Money</div><div class="pgs">Deposit funds into your account</div></div></div>
+        <div style="max-width:640px;">
+          <div class="panel" style="margin-bottom:16px;">
+            <div class="pt" style="margin-bottom:16px;">Choose Deposit Method</div>
+            <div class="dep-methods">
+              <div class="dep-m sel" onclick="selDep(this)"><div class="dm-ic">🏦</div><div class="dm-lb">Bank Transfer</div></div>
+              <div class="dep-m" onclick="selDep(this)"><div class="dm-ic">💳</div><div class="dm-lb">Debit Card</div></div>
+              <div class="dep-m" onclick="selDep(this)"><div class="dm-ic">📱</div><div class="dm-lb">UPI / QR</div></div>
+            </div>
+            <div class="field"><label>To Account</label>
+              <select><option>Savings ••4821 — ₹2,47,850</option><option>Business ••1205 — ₹5,12,000</option></select>
+            </div>
+            <div class="fg2">
+              <div class="field"><label>Amount (₹)</label><input type="number" id="dep-amt" placeholder="0.00"></div>
+              <div class="field"><label>Source</label><input placeholder="Bank / UPI ID / Card No."></div>
+            </div>
+            <div class="field"><label>Remarks</label><input placeholder="Reference..."></div>
+            <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px;">
+              <button class="btn btn-ghost btn-sm" onclick="setDep(5000)">₹5,000</button>
+              <button class="btn btn-ghost btn-sm" onclick="setDep(10000)">₹10,000</button>
+              <button class="btn btn-ghost btn-sm" onclick="setDep(25000)">₹25,000</button>
+              <button class="btn btn-ghost btn-sm" onclick="setDep(50000)">₹50,000</button>
+            </div>
+            <button class="btn btn-primary" style="width:100%;justify-content:center;padding:12px;" onclick="doDeposit()">+ Confirm Deposit</button>
+          </div>
+          <div class="panel">
+            <div class="ph"><div class="pt">Recent Deposits</div></div>
+            <div class="txi"><div class="txii cr">📥</div><div class="txi-b"><div class="txi-n">Salary Credit</div><div class="txi-s">19 Mar 2026 · Savings ••4821</div></div><div class="txi-a cr">+₹95,000</div></div>
+            <div class="txi"><div class="txii cr">💸</div><div class="txi-b"><div class="txi-n">Transfer from Priya K.</div><div class="txi-s">17 Mar 2026 · Savings ••4821</div></div><div class="txi-a cr">+₹12,500</div></div>
+            <div class="txi"><div class="txii cr">📱</div><div class="txi-b"><div class="txi-n">UPI Deposit</div><div class="txi-s">10 Mar 2026 · Savings ••4821</div></div><div class="txi-a cr">+₹5,000</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ━━━━ ANALYTICS ━━━━ -->
+      <div class="page" id="pg-analytics">
+        <div class="pgh"><div><div class="pgt">Analytics</div><div class="pgs">Financial performance overview</div></div></div>
+        <div class="dash-grid4">
+          <div class="stat-card"><div class="sc-l">Total Balance</div><div class="sc-v c">₹8.28L</div><div class="sc-ch up">↑ 4.2%</div></div>
+          <div class="stat-card"><div class="sc-l">Inbound</div><div class="sc-v g">₹1.24L</div><div class="sc-ch up">↑ 8.1%</div></div>
+          <div class="stat-card"><div class="sc-l">Outbound</div><div class="sc-v r">₹42,300</div><div class="sc-ch dn">↑ 2.3%</div></div>
+          <div class="stat-card"><div class="sc-l">Net</div><div class="sc-v">₹81,700</div><div class="sc-ch up">↑ 12%</div></div>
+        </div>
+        <div class="dash-grid2">
+          <div class="panel">
+            <div class="ph"><div class="pt">Cash Flow (6 Months)</div></div>
+            <div style="display:flex;align-items:flex-end;gap:7px;height:110px;" id="a-chart"></div>
+            <div style="display:flex;gap:16px;margin-top:10px;">
+              <div style="display:flex;align-items:center;gap:5px;font-size:11px;"><div style="width:8px;height:8px;border-radius:50%;background:var(--cyan)"></div>Inflow</div>
+              <div style="display:flex;align-items:center;gap:5px;font-size:11px;"><div style="width:8px;height:8px;border-radius:50%;background:var(--red)"></div>Outflow</div>
+            </div>
+          </div>
+          <div class="panel">
+            <div class="ph"><div class="pt">Spending Breakdown</div></div>
+            <div class="donut-wrap">
+              <svg width="100" height="100" viewBox="0 0 100 100">
+                <circle cx="50" cy="50" r="36" fill="none" stroke="#222" stroke-width="13"/>
+                <circle cx="50" cy="50" r="36" fill="none" stroke="var(--cyan)" stroke-width="13" stroke-dasharray="86 140" stroke-dashoffset="0" stroke-linecap="round"/>
+                <circle cx="50" cy="50" r="36" fill="none" stroke="var(--green)" stroke-width="13" stroke-dasharray="46 140" stroke-dashoffset="-86" stroke-linecap="round"/>
+                <circle cx="50" cy="50" r="36" fill="none" stroke="var(--gold)" stroke-width="13" stroke-dasharray="28 140" stroke-dashoffset="-132" stroke-linecap="round"/>
+                <circle cx="50" cy="50" r="36" fill="none" stroke="var(--red)" stroke-width="13" stroke-dasharray="20 140" stroke-dashoffset="-160" stroke-linecap="round"/>
+              </svg>
+              <div class="dleg">
+                <div class="dli"><div class="dd" style="background:var(--cyan)"></div>EMI 38%</div>
+                <div class="dli"><div class="dd" style="background:var(--green)"></div>Groceries 20%</div>
+                <div class="dli"><div class="dd" style="background:var(--gold)"></div>Utilities 13%</div>
+                <div class="dli"><div class="dd" style="background:var(--red)"></div>Others 8%</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="panel">
+          <div class="ph"><div class="pt">All Transactions</div></div>
+          <table class="tbl">
+            <thead><tr><th>Date</th><th>Description</th><th>Type</th><th>Account</th><th>Amount</th><th>Status</th></tr></thead>
+            <tbody id="a-txns"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ━━━━ LOANS ━━━━ -->
+      <div class="page" id="pg-loans">
+        <div class="pgh"><div><div class="pgt">Loans</div><div class="pgs">Manage your loan products</div></div><button class="btn btn-primary" onclick="openModal('modal-loan')">+ Apply for Loan</button></div>
+        <div class="panel" style="margin-bottom:16px;">
+          <div class="ph"><div class="pt">Available Loan Products</div></div>
+          <table class="tbl">
+            <thead><tr><th>Loan</th><th>Type</th><th>Max Amount</th><th>Interest Rate</th><th>Tenure</th><th>Est. EMI</th><th></th></tr></thead>
+            <tbody>
+              <tr><td>🏠 Home Loan</td><td><span class="chip ch-per">Personal</span></td><td>₹50,00,000</td><td style="color:var(--cyan)">8.5% p.a.</td><td>240 mo</td><td>₹43,391</td><td><button class="btn btn-primary btn-sm" onclick="openModal('modal-loan')">Apply</button></td></tr>
+              <tr><td>🚗 Auto Loan</td><td><span class="chip ch-per">Personal</span></td><td>₹15,00,000</td><td style="color:var(--cyan)">9.2% p.a.</td><td>84 mo</td><td>₹24,105</td><td><button class="btn btn-primary btn-sm" onclick="openModal('modal-loan')">Apply</button></td></tr>
+              <tr><td>🏢 Business Loan</td><td><span class="chip ch-biz">Business</span></td><td>₹1,00,00,000</td><td style="color:var(--cyan)">10.5% p.a.</td><td>120 mo</td><td>₹1,35,200</td><td><button class="btn btn-primary btn-sm" onclick="openModal('modal-loan')">Apply</button></td></tr>
+              <tr><td>📚 Education Loan</td><td><span class="chip ch-per">Personal</span></td><td>₹20,00,000</td><td style="color:var(--cyan)">7.8% p.a.</td><td>96 mo</td><td>₹24,810</td><td><button class="btn btn-primary btn-sm" onclick="openModal('modal-loan')">Apply</button></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="dash-grid2">
+          <div class="loan-card">
+            <div class="lct"><div><div class="lc-tp">🏠 Home Loan</div><div style="font-size:10px;color:var(--muted);margin-top:2px">Approved · Anna Nagar Branch</div></div><span class="chip ch-act">Active</span></div>
+            <div class="prog"><div class="prog-f" style="width:62%"></div></div>
+            <div class="lm"><div><div class="lml">Amount</div><div class="lmv">₹7,50,000</div></div><div><div class="lml">Outstanding</div><div class="lmv">₹4,80,000</div></div><div><div class="lml">EMI</div><div class="lmv">₹18,450</div></div><div><div class="lml">Rate</div><div class="lmv">8.5%</div></div></div>
+          </div>
+          <div class="loan-card">
+            <div class="lct"><div><div class="lc-tp">🚗 Auto Loan</div><div style="font-size:10px;color:var(--muted);margin-top:2px">Pending employee review</div></div><span class="chip ch-pen">Review</span></div>
+            <div class="prog"><div class="prog-f" style="width:20%"></div></div>
+            <div class="lm"><div><div class="lml">Amount</div><div class="lmv">₹1,70,000</div></div><div><div class="lml">Rate</div><div class="lmv">9.2%</div></div><div><div class="lml">Tenure</div><div class="lmv">36 mo</div></div><div><div class="lml">Status</div><div class="lmv" style="color:var(--gold)">Incomplete</div></div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ━━━━ PROFILE ━━━━ -->
+      <div class="page" id="pg-profile">
+        <div class="pgh"><div><div class="pgt">Profile</div><div class="pgs">Your personal information</div></div></div>
+        <div style="max-width:580px;">
+          <div class="panel">
+            <div class="ph"><div class="pt">Personal Details</div><button class="btn btn-ghost btn-sm">Edit</button></div>
+            <div style="display:flex;align-items:center;gap:16px;margin-bottom:22px;padding-bottom:20px;border-bottom:1px solid var(--border);">
+              <div style="width:60px;height:60px;border-radius:50%;background:linear-gradient(135deg,var(--cyan),#006688);display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:800;color:#000;">DK</div>
+              <div><div style="font-size:18px;font-weight:800;">Dhakshna D.</div><div style="font-size:11px;color:var(--muted);margin-top:3px;">Premium Account</div></div>
+            </div>
+            <div class="fg2">
+              <div class="field"><label>Full Name</label><input value="Dhakshna D." readonly></div>
+              <div class="field"><label>Mobile Number</label><input value="+91 99400 11223" readonly></div>
+              <div class="field"><label>Email</label><input value="dhakshna@gmail.com" readonly></div>
+              <div class="field"><label>Address</label><input value="42 Lotus St, Anna Nagar, Chennai" readonly></div>
+              <div class="field"><label>PAN Number</label><input value="DKXXX•••••Y" readonly></div>
+              <div class="field"><label>Aadhaar Number</label><input value="••••  ••••  9912" readonly></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ━━━━ EMPLOYEE DASHBOARD ━━━━ -->
+      <div class="page" id="pg-emp-dash">
+        <div class="pgh"><div><div class="pgt">Employee Dashboard</div><div class="pgs">Branch operations overview</div></div></div>
+        <div class="dash-grid4">
+          <div class="stat-card"><div class="sc-l">Pending Approvals</div><div class="sc-v o">7</div></div>
+          <div class="stat-card"><div class="sc-l">Approved Today</div><div class="sc-v g">12</div></div>
+          <div class="stat-card"><div class="sc-l">Loan Reviews</div><div class="sc-v c">5</div></div>
+          <div class="stat-card"><div class="sc-l">Disbursed Mar</div><div class="sc-v">₹24L</div></div>
+        </div>
+        <div class="dash-grid2">
+          <div class="panel">
+            <div class="ph"><div class="pt">Pending Account Approvals</div></div>
+            <table class="tbl">
+              <thead><tr><th>Name</th><th>Account Type</th><th>Requested</th><th>Action</th></tr></thead>
+              <tbody>
+                <tr><td>Nivetha S.</td><td><span class="chip ch-sav">Savings</span></td><td>18 Mar 2026</td><td style="display:flex;gap:6px;padding:11px 0;"><button class="btn btn-primary btn-sm">✓ Approve</button><button class="btn btn-danger btn-sm">✗ Reject</button></td></tr>
+                <tr><td>Karthik R.</td><td><span class="chip ch-biz">Business</span></td><td>17 Mar 2026</td><td style="display:flex;gap:6px;padding:11px 0;"><button class="btn btn-primary btn-sm">✓ Approve</button><button class="btn btn-danger btn-sm">✗ Reject</button></td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="panel">
+            <div class="ph"><div class="pt">My Profile</div></div>
+            <div class="emp-card">
+              <div class="emp-av">RS</div>
+              <div>
+                <div class="emp-n">Rajan Subramaniam</div>
+                <div class="emp-r">Branch Manager</div>
+                <div class="emp-m">
+                  <div class="emi"><div class="eml">Branch</div><div class="emv">Anna Nagar, Chennai</div></div>
+                  <div class="emi"><div class="eml">Designation</div><div class="emv">Branch Manager</div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ━━━━ EMPLOYEE ACCOUNTS ━━━━ -->
+      <div class="page" id="pg-emp-accounts">
+        <div class="pgh"><div><div class="pgt">Manage Accounts</div><div class="pgs">Validate customer details · approve / close accounts</div></div></div>
+        <div class="panel">
+          <div class="ph"><div class="pt">Customer Accounts</div></div>
+          <table class="tbl">
+            <thead><tr><th>Name</th><th>Account Type</th><th>Balance</th><th>Branch</th><th>Opened</th><th>Status</th><th>Action</th></tr></thead>
+            <tbody>
+              <tr><td>Dhakshna D.</td><td><span class="chip ch-sav">Savings</span></td><td style="color:var(--cyan);font-weight:700">₹2,47,850</td><td>Anna Nagar</td><td>12 Jan 22</td><td><span class="chip ch-act">Active</span></td><td><button class="btn btn-ghost btn-sm">View</button></td></tr>
+              <tr><td>Dhakshna D.</td><td><span class="chip ch-biz">Business</span></td><td style="color:var(--cyan);font-weight:700">₹5,12,000</td><td>Guindy</td><td>20 Mar 24</td><td><span class="chip ch-act">Active</span></td><td><button class="btn btn-ghost btn-sm">View</button></td></tr>
+              <tr><td>Nivetha S.</td><td><span class="chip ch-sav">Savings</span></td><td>—</td><td>T. Nagar</td><td>18 Mar 26</td><td><span class="chip ch-pen">Pending</span></td><td><button class="btn btn-primary btn-sm">Approve</button></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ━━━━ EMPLOYEE LOANS ━━━━ -->
+      <div class="page" id="pg-emp-loans">
+        <div class="pgh"><div><div class="pgt">Loan Review</div><div class="pgs">Creditworthiness check via inbound/outbound transactions</div></div></div>
+        <div class="panel">
+          <div class="ph"><div class="pt">Pending Loan Applications</div></div>
+          <table class="tbl">
+            <thead><tr><th>Customer</th><th>Type</th><th>Amount</th><th>Rate</th><th>Inbound</th><th>Outbound</th><th>Credit</th><th>Action</th></tr></thead>
+            <tbody>
+              <tr><td>Dhakshna D.</td><td><span class="chip ch-per">Personal</span></td><td>₹1,70,000</td><td>9.2%</td><td style="color:var(--green)">₹1,24,500</td><td style="color:var(--red)">₹42,300</td><td style="color:var(--green);font-weight:700">Good ✓</td><td style="display:flex;gap:5px;padding:11px 0;"><button class="btn btn-primary btn-sm">Approve</button><button class="btn btn-danger btn-sm">Reject</button></td></tr>
+              <tr><td>Nivetha S.</td><td><span class="chip ch-biz">Business</span></td><td>₹5,00,000</td><td>10.5%</td><td style="color:var(--green)">₹85,000</td><td style="color:var(--red)">₹91,000</td><td style="color:var(--red);font-weight:700">Risky ⚠</td><td style="display:flex;gap:5px;padding:11px 0;"><button class="btn btn-primary btn-sm">Approve</button><button class="btn btn-danger btn-sm">Reject</button></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ━━━━ EMPLOYEE TRANSACTIONS ━━━━ -->
+      <div class="page" id="pg-emp-txns">
+        <div class="pgh"><div><div class="pgt">All Transactions</div><div class="pgs">Bank-wide transaction monitoring</div></div></div>
+        <div class="dash-grid4" style="grid-template-columns:1fr 1fr 1fr;">
+          <div class="stat-card"><div class="sc-l">Total Inbound</div><div class="sc-v g">₹48.2L</div></div>
+          <div class="stat-card"><div class="sc-l">Total Outbound</div><div class="sc-v r">₹31.7L</div></div>
+          <div class="stat-card"><div class="sc-l">Net Flow</div><div class="sc-v c">₹16.5L</div></div>
+        </div>
+        <div class="panel">
+          <table class="tbl">
+            <thead><tr><th>Account</th><th>Source</th><th>Destination</th><th>Type</th><th>Amount</th><th>Status</th><th>Remarks</th></tr></thead>
+            <tbody>
+              <tr><td>Savings ••4821</td><td>PAYROLL-SYS</td><td>Savings ••4821</td><td><span class="chip ch-act">deposit</span></td><td style="color:var(--green);font-weight:700">+₹95,000</td><td><span class="chip ch-act">Completed</span></td><td style="color:var(--muted)">Salary Mar</td></tr>
+              <tr><td>Savings ••4821</td><td>Savings ••4821</td><td>AMZN-PAY</td><td><span class="chip ch-rej">withdraw</span></td><td style="color:var(--red);font-weight:700">-₹3,499</td><td><span class="chip ch-act">Completed</span></td><td style="color:var(--muted)">Amazon Pay</td></tr>
+              <tr><td>Savings ••4821</td><td>HDFC ••2311</td><td>Savings ••4821</td><td><span class="chip ch-act">transfer</span></td><td style="color:var(--green);font-weight:700">+₹12,500</td><td><span class="chip ch-act">Completed</span></td><td style="color:var(--muted)">From Priya K.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ━━━━ ADMIN DASHBOARD ━━━━ -->
+      <div class="page" id="pg-admin-dash">
+        <div class="pgh"><div><div class="pgt">Admin Dashboard</div><div class="pgs">System management & user control</div></div></div>
+        <div class="dash-grid4">
+          <div class="stat-card"><div class="sc-l">Total Customers</div><div class="sc-v">1,248</div></div>
+          <div class="stat-card"><div class="sc-l">Employees</div><div class="sc-v c">34</div></div>
+          <div class="stat-card"><div class="sc-l">Active Accounts</div><div class="sc-v g">3,812</div></div>
+          <div class="stat-card"><div class="sc-l">Pending</div><div class="sc-v o">9</div></div>
+        </div>
+        <div class="dash-grid2">
+          <div class="panel">
+            <div class="ph"><div class="pt">User Overview</div></div>
+            <table class="tbl">
+              <thead><tr><th>Name</th><th>Role</th><th>Status</th><th></th></tr></thead>
+              <tbody>
+                <tr><td>Dhakshna D.</td><td><span class="chip ch-sav">Customer</span></td><td><span class="chip ch-act">Active</span></td><td><button class="btn btn-ghost btn-sm">Modify</button></td></tr>
+                <tr><td>Rajan S.</td><td><span class="chip ch-biz">Employee</span></td><td><span class="chip ch-act">Active</span></td><td><button class="btn btn-ghost btn-sm">Modify</button></td></tr>
+                <tr><td>Nivetha S.</td><td><span class="chip ch-sav">Customer</span></td><td><span class="chip ch-pen">Pending</span></td><td><button class="btn btn-primary btn-sm">Activate</button></td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="panel">
+            <div class="ph"><div class="pt">Security Status</div></div>
+            <div class="txi"><div class="txii cr">🔐</div><div class="txi-b"><div class="txi-n">JWT Validation</div><div class="txi-s">All routes protected · RS256</div></div><span class="chip ch-act">Active</span></div>
+            <div class="txi"><div class="txii cr">🛡</div><div class="txi-b"><div class="txi-n">RBAC</div><div class="txi-s">Customer · Employee · Admin</div></div><span class="chip ch-act">Active</span></div>
+            <div class="txi"><div class="txii cr">🌐</div><div class="txi-b"><div class="txi-n">Backend</div><div class="txi-s">Spring Boot · MySQL</div></div><span class="chip ch-per">Running</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ━━━━ ADMIN USERS ━━━━ -->
+      <div class="page" id="pg-admin-users">
+        <div class="pgh"><div><div class="pgt">User Management</div></div><button class="btn btn-primary" onclick="openModal('modal-add-user')">+ Add User</button></div>
+        <div class="panel">
+          <table class="tbl">
+            <thead><tr><th>Name</th><th>Role</th><th>Email</th><th>Status</th><th>Actions</th></tr></thead>
+            <tbody>
+              <tr><td>Dhakshna D.</td><td><span class="chip ch-sav">Customer</span></td><td><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="aacec2cbc1d9c2c4cbeacdc7cbc3c684c9c5c7">[email&#160;protected]</a></td><td><span class="chip ch-act">Active</span></td><td style="display:flex;gap:5px;padding:11px 0;"><button class="btn btn-ghost btn-sm">Edit</button><button class="btn btn-danger btn-sm">Deactivate</button></td></tr>
+              <tr><td>Rajan S.</td><td><span class="chip ch-biz">Employee</span></td><td><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="0173606b606f416c6077647368626a63606f6a2f686f">[email&#160;protected]</a></td><td><span class="chip ch-act">Active</span></td><td style="display:flex;gap:5px;padding:11px 0;"><button class="btn btn-ghost btn-sm">Edit</button><button class="btn btn-danger btn-sm">Deactivate</button></td></tr>
+              <tr><td>Nivetha S.</td><td><span class="chip ch-sav">Customer</span></td><td><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="37595e4152435f5677505a565e5b1954585a">[email&#160;protected]</a></td><td><span class="chip ch-pen">Pending</span></td><td style="display:flex;gap:5px;padding:11px 0;"><button class="btn btn-primary btn-sm">Activate</button></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ━━━━ DB SCHEMA ━━━━ -->
+      <div class="page" id="pg-db-schema">
+        <div class="pgh"><div><div class="pgt">Database Schema</div><div class="pgs">MySQL · 5 tables · ERD Overview</div></div></div>
+        <div class="db-grid">
+          <div class="db-t"><div class="db-h">👤 Customer_details</div><div class="db-b">
+            <div class="db-r"><span class="pk-f">🔑 c_id</span><span class="dbt">INT PK</span></div>
+            <div class="db-r"><span>c_name</span><span class="dbt">VARCHAR(100)</span></div>
+            <div class="db-r"><span>c_mob_no</span><span class="dbt">VARCHAR(15)</span></div>
+            <div class="db-r"><span>c_mail_id</span><span class="dbt">VARCHAR(100)</span></div>
+            <div class="db-r"><span>c_address</span><span class="dbt">TEXT</span></div>
+            <div class="db-r"><span>c_pan_no</span><span class="dbt">VARCHAR(10)</span></div>
+            <div class="db-r"><span>c_aadhar_no</span><span class="dbt">VARCHAR(12)</span></div>
+          </div></div>
+          <div class="db-t"><div class="db-h">💳 account</div><div class="db-b">
+            <div class="db-r"><span class="pk-f">🔑 a_id</span><span class="dbt">INT PK</span></div>
+            <div class="db-r"><span>a_type</span><span class="dbt">ENUM(Savings/Business)</span></div>
+            <div class="db-r"><span>a_balance</span><span class="dbt">DECIMAL(15,2)</span></div>
+          </div></div>
+          <div class="db-t"><div class="db-h">🔗 c_a_details</div><div class="db-b">
+            <div class="db-r"><span class="pk-f">🔑 id</span><span class="dbt">INT PK</span></div>
+            <div class="db-r"><span class="fk-f">🔗 c_id</span><span class="dbt">FK → Customer_details</span></div>
+            <div class="db-r"><span class="fk-f">🔗 a_id</span><span class="dbt">FK → account</span></div>
+            <div class="db-r"><span>a_open_date</span><span class="dbt">DATE</span></div>
+            <div class="db-r"><span>a_branch</span><span class="dbt">VARCHAR(100)</span></div>
+            <div class="db-r"><span class="fk-f">🔗 verified_by_emp_id</span><span class="dbt">FK → EMPLOYEES</span></div>
+            <div class="db-r"><span>a_status</span><span class="dbt">ENUM(Active/Inactive)</span></div>
+          </div></div>
+          <div class="db-t"><div class="db-h">↕ Transcation</div><div class="db-b">
+            <div class="db-r"><span class="pk-f">🔑 t_id</span><span class="dbt">INT PK</span></div>
+            <div class="db-r"><span class="fk-f">🔗 a_id</span><span class="dbt">FK → account</span></div>
+            <div class="db-r"><span>source_account_id</span><span class="dbt">VARCHAR(20)</span></div>
+            <div class="db-r"><span>destination_account_id</span><span class="dbt">VARCHAR(20)</span></div>
+            <div class="db-r"><span>t_type</span><span class="dbt">ENUM(deposit/withdraw/transfer)</span></div>
+            <div class="db-r"><span>t_amount</span><span class="dbt">DECIMAL(15,2)</span></div>
+            <div class="db-r"><span>t_status</span><span class="dbt">ENUM(Completed/Notcompleted)</span></div>
+            <div class="db-r"><span>t_remarks</span><span class="dbt">TEXT</span></div>
+          </div></div>
+          <div class="db-t"><div class="db-h">🏛 LOAN</div><div class="db-b">
+            <div class="db-r"><span class="pk-f">🔑 l_id</span><span class="dbt">INT PK</span></div>
+            <div class="db-r"><span class="fk-f">🔗 c_id</span><span class="dbt">FK → Customer_details</span></div>
+            <div class="db-r"><span class="fk-f">🔗 a_id</span><span class="dbt">FK → account</span></div>
+            <div class="db-r"><span>l_type</span><span class="dbt">ENUM(Personal/Business)</span></div>
+            <div class="db-r"><span>l_amount</span><span class="dbt">DECIMAL(15,2)</span></div>
+            <div class="db-r"><span>l_intrest_rate</span><span class="dbt">DECIMAL(5,2)</span></div>
+            <div class="db-r"><span>l_tenure_month</span><span class="dbt">INT</span></div>
+            <div class="db-r"><span>l_emi</span><span class="dbt">DECIMAL(15,2)</span></div>
+            <div class="db-r"><span>l_status</span><span class="dbt">ENUM(incomplete/completed)</span></div>
+            <div class="db-r"><span class="fk-f">🔗 l_approved_by_emp_id</span><span class="dbt">FK → EMPLOYEES</span></div>
+            <div class="db-r"><span>disbursement_date</span><span class="dbt">DATE</span></div>
+            <div class="db-r"><span>disbursement_amount</span><span class="dbt">DECIMAL(15,2)</span></div>
+          </div></div>
+          <div class="db-t"><div class="db-h">🏦 EMPLOYEES</div><div class="db-b">
+            <div class="db-r"><span class="pk-f">🔑 e_id</span><span class="dbt">INT PK</span></div>
+            <div class="db-r"><span>e_name</span><span class="dbt">VARCHAR(100)</span></div>
+            <div class="db-r"><span>e_branch</span><span class="dbt">VARCHAR(100)</span></div>
+            <div class="db-r"><span>e_designation</span><span class="dbt">VARCHAR(50)</span></div>
+          </div></div>
+        </div>
+        <div class="panel" style="margin-top:14px;">
+          <div class="ph"><div class="pt">Entity Relationships</div></div>
+          <div style="display:flex;gap:20px;flex-wrap:wrap;font-size:12px;">
+            <span><span style="color:var(--cyan)">Customer_details</span> → many <span style="color:var(--cyan)">c_a_details</span></span>
+            <span><span style="color:var(--cyan)">account</span> → many <span style="color:var(--cyan)">c_a_details</span></span>
+            <span><span style="color:var(--cyan)">account</span> → many <span style="color:var(--cyan)">Transcation</span></span>
+            <span><span style="color:var(--cyan)">Customer_details</span> → many <span style="color:var(--cyan)">LOAN</span></span>
+            <span><span style="color:var(--cyan)">EMPLOYEES</span> → many <span style="color:var(--cyan)">c_a_details (verified_by)</span></span>
+            <span><span style="color:var(--cyan)">EMPLOYEES</span> → many <span style="color:var(--cyan)">LOAN (approved_by)</span></span>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /content -->
+  </div><!-- /main -->
+</div><!-- /shell -->
+
+<!-- ══════════ MODALS ══════════ -->
+<div class="modal-bg" id="modal-qt">
+  <div class="modal">
+    <div class="modal-title">✈ Quick Transfer</div>
+    <div class="field"><label>To</label><input id="qt-to-inp" readonly></div>
+    <div class="field"><label>From Account</label><select><option>Savings ••4821 — ₹2,47,850</option><option>Business ••1205 — ₹5,12,000</option></select></div>
+    <div class="field"><label>Amount (₹)</label><input type="number" placeholder="0.00"></div>
+    <div class="field"><label>Remarks</label><input placeholder="Optional..."></div>
+    <div class="mact">
+      <button class="btn-cancel" onclick="closeModal('modal-qt')">Cancel</button>
+      <button class="btn-confirm" onclick="closeModal('modal-qt');showSuccess('Transfer initiated successfully!')">✈ Confirm Transfer</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-bg" id="modal-open-acct">
+  <div class="modal">
+    <div class="modal-title">💳 Open New Account</div>
+    <div class="fg2">
+      <div class="field"><label>Full Name</label><input placeholder="Your full name"></div>
+      <div class="field"><label>Mobile Number</label><input placeholder="+91 XXXXX XXXXX"></div>
+    </div>
+    <div class="field"><label>Address</label><textarea placeholder="Full address" style="height:50px;"></textarea></div>
+    <div class="fg2">
+      <div class="field"><label>Date of Birth</label><input type="date" id="dob-in" onchange="calcAge()"></div>
+      <div class="field"><label>Age (auto-calculated)</label><input id="age-out" readonly placeholder="Auto-filled"></div>
+    </div>
+    <div class="fg2">
+      <div class="field"><label>Aadhaar Number</label><input placeholder="12-digit Aadhaar" maxlength="12"></div>
+      <div class="field"><label>PAN Number</label><input placeholder="ABCDE1234F" maxlength="10"></div>
+    </div>
+    <div class="field"><label>Account Type</label><select><option>Savings</option><option>Business</option></select></div>
+    <div class="mact">
+      <button class="btn-cancel" onclick="closeModal('modal-open-acct')">Cancel</button>
+      <button class="btn-confirm" onclick="closeModal('modal-open-acct');showSuccess('Account application submitted!')">Submit Application →</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-bg" id="modal-bene">
+  <div class="modal">
+    <div class="modal-title">👤 Add Beneficiary</div>
+    <div class="fg2">
+      <div class="field"><label>Account Name</label><input placeholder="Full name"></div>
+      <div class="field"><label>Account Number</label><input placeholder="Account number"></div>
+    </div>
+    <div class="field"><label>Bank Name</label>
+      <select onchange="loadBranches(this)"><option>Select Bank...</option><option>SBI</option><option>HDFC Bank</option><option>ICICI Bank</option><option>Axis Bank</option></select>
+    </div>
+    <div class="fg2">
+      <div class="field"><label>Branch</label><select id="br-sel" onchange="loadIFSC(this)"><option>Select Branch...</option></select></div>
+      <div class="field"><label>IFSC Code (auto-filled)</label><input id="ifsc-out" readonly placeholder="Auto-filled"></div>
+    </div>
+    <div class="mact">
+      <button class="btn-cancel" onclick="closeModal('modal-bene')">Cancel</button>
+      <button class="btn-confirm" onclick="closeModal('modal-bene');showSuccess('Beneficiary added successfully!')">Save →</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-bg" id="modal-loan">
+  <div class="modal">
+    <div class="modal-title">🏛 Apply for Loan</div>
+    <div class="field"><label>Loan Type</label><select><option>Personal</option><option>Business</option></select></div>
+    <div class="fg2">
+      <div class="field"><label>Amount (₹)</label><input type="number" placeholder="Loan amount"></div>
+      <div class="field"><label>Tenure (months)</label><input type="number" placeholder="e.g. 36"></div>
+    </div>
+    <div class="field"><label>Purpose</label><textarea placeholder="Purpose of loan..." style="height:55px;"></textarea></div>
+    <div class="field"><label>Linked Account</label><select><option>Savings ••4821</option><option>Business ••1205</option></select></div>
+    <div class="mact">
+      <button class="btn-cancel" onclick="closeModal('modal-loan')">Cancel</button>
+      <button class="btn-confirm" onclick="closeModal('modal-loan');showSuccess('Loan application submitted for review!')">Submit →</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-bg" id="modal-add-user">
+  <div class="modal">
+    <div class="modal-title">👤 Add New User</div>
+    <div class="fg2">
+      <div class="field"><label>Full Name</label><input placeholder="Name"></div>
+      <div class="field"><label>Role</label><select><option>Customer</option><option>Employee</option></select></div>
+    </div>
+    <div class="field"><label>Email</label><input type="email" placeholder="email@example.com"></div>
+    <div class="fg2">
+      <div class="field"><label>Password</label><input type="password" placeholder="••••••••"></div>
+      <div class="field"><label>Branch</label><input placeholder="Branch name"></div>
+    </div>
+    <div class="mact">
+      <button class="btn-cancel" onclick="closeModal('modal-add-user')">Cancel</button>
+      <button class="btn-confirm" onclick="closeModal('modal-add-user');showSuccess('User account created successfully!')">Create →</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-bg" id="modal-success">
+  <div class="modal">
+    <div class="succ">
+      <div class="succ-ic">✅</div>
+      <div style="font-size:17px;font-weight:800;margin-bottom:5px;">Done!</div>
+      <div style="font-size:13px;color:var(--muted);margin-bottom:20px;" id="succ-msg">Completed successfully.</div>
+      <button class="btn btn-primary" style="padding:10px 32px;" onclick="closeModal('modal-success')">Great!</button>
+    </div>
+  </div>
+</div>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+// ──── DATA ────
+const accounts = {
+  sav:{
+    name:'Dhakshna D.',balance:'₹2,47,850.00',num:'**** **** **** 4821',
+    ifsc:'MVRK0004821',branch:'Anna Nagar, Chennai',opened:'12 Jan 2022',
+    rate:'4.5% p.a.',type:'Savings',status:'Active',
+    txns:[
+      {date:'Today',time:'09:14 AM',dir:'cr',desc:'Salary Credit',sub:'PAYROLL-SYS',amt:'+₹95,000',bal:'₹2,47,850'},
+      {date:'Yesterday',time:'03:41 PM',dir:'db',desc:'Amazon Pay',sub:'Card ••4821',amt:'-₹3,499',bal:'₹1,52,850'},
+      {date:'17 Mar 2026',time:'11:02 AM',dir:'cr',desc:'Transfer from Priya K.',sub:'HDFC ••2311',amt:'+₹12,500',bal:'₹1,56,349'},
+      {date:'16 Mar 2026',time:'08:55 AM',dir:'db',desc:'TNEB Electricity',sub:'Bill Payment',amt:'-₹1,820',bal:'₹1,43,849'},
+      {date:'15 Mar 2026',time:'12:00 AM',dir:'db',desc:'Home Loan EMI',sub:'Auto-debit',amt:'-₹18,450',bal:'₹1,45,669'},
+    ]
+  },
+  biz:{
+    name:'Dhakshna Enterprises',balance:'₹5,12,000.00',num:'**** **** **** 1205',
+    ifsc:'MVRK0001205',branch:'Guindy, Chennai',opened:'20 Mar 2024',
+    rate:'3.8% p.a.',type:'Business',status:'Active',
+    txns:[
+      {date:'18 Mar 2026',time:'10:00 AM',dir:'cr',desc:'Client Payment',sub:'ICICI ••7782',amt:'+₹2,50,000',bal:'₹5,12,000'},
+      {date:'14 Mar 2026',time:'02:30 PM',dir:'db',desc:'Office Rent',sub:'Landlord',amt:'-₹45,000',bal:'₹2,62,000'},
+      {date:'10 Mar 2026',time:'11:00 AM',dir:'cr',desc:'Invoice #1042',sub:'Tech Corp',amt:'+₹1,20,000',bal:'₹3,07,000'},
+    ]
+  }
+};
+let selType='sav';
+
+// ──── LOGIN ────
+let currentRole='customer';
+function doLogin(role){
+  currentRole=role;
+  document.getElementById('login-screen').style.display='none';
+  document.getElementById('main-app').style.display='flex';
+  ['cust','emp','admin'].forEach(r=>document.getElementById('sb-'+r).style.display='none');
+  const roleMap={customer:'cust',employee:'emp',admin:'admin'};
+  document.getElementById('sb-'+roleMap[role]).style.display='';
+  const names={customer:'Dhakshna',employee:'Rajan S.',admin:'Admin'};
+  const avs={customer:'DK',employee:'RS',admin:'AD'};
+  const roles={customer:'Premium',employee:'Employee',admin:'Administrator'};
+  document.getElementById('tb-name').textContent=names[role];
+  document.getElementById('tb-av').textContent=avs[role];
+  document.getElementById('tb-role').textContent=roles[role];
+  if(role==='customer'){
+    document.getElementById('vc-name').textContent='DHAKSHNA D.';
+    loadAcctInfo('sav');
+    loadAcctTxns('sav');
+  }
+  buildAChart();buildATxns();buildDashTxns();
+  nav({customer:'dashboard',employee:'emp-dash',admin:'admin-dash'}[role]);
+}
+function logout(){
+  document.getElementById('login-screen').style.display='flex';
+  document.getElementById('main-app').style.display='none';
+}
+
+// ──── NAV ────
+function nav(pg){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  const el=document.getElementById('pg-'+pg);
+  if(el) el.classList.add('active');
+  document.querySelectorAll('.ni').forEach(n=>n.classList.remove('act'));
+  const lbl=pg.replace('emp-','').replace('admin-','').toLowerCase().split('-')[0];
+  document.querySelectorAll('.ni').forEach(n=>{
+    if(n.textContent.trim().toLowerCase().replace(/[^a-z]/g,'').startsWith(lbl)) n.classList.add('act');
+  });
+}
+
+// ──── ACCOUNT CARD SELECT ────
+function selectCard(el,type){
+  document.querySelectorAll('.acct-card').forEach(c=>c.classList.remove('selected'));
+  el.classList.add('selected');
+  selType=type;
+  loadAcctInfo(type);
+  loadAcctTxns(type);
+}
+
+function loadAcctInfo(type){
+  const a=accounts[type];
+  const el=document.getElementById('acct-info-rows');
+  if(!el)return;
+  el.innerHTML=`
+    <div class="aip-row"><span class="aip-lbl">Status</span><span class="aip-val"><span class="status-pill">${a.status}</span></span></div>
+    <div class="aip-row"><span class="aip-lbl">Opened On</span><span class="aip-val">${a.opened}</span></div>
+    <div class="aip-row"><span class="aip-lbl">Interest Rate</span><span class="aip-val">${a.rate}</span></div>
+    <div class="aip-row"><span class="aip-lbl">Account Type</span><span class="aip-val">${a.type}</span></div>
+    <div class="aip-row"><span class="aip-lbl">IFSC Code</span><span class="aip-val">${a.ifsc}</span></div>
+    <div class="aip-row"><span class="aip-lbl">Branch</span><span class="aip-val">${a.branch}</span></div>
+    <div class="aip-row"><span class="aip-lbl">Account Number</span><span class="aip-val">${a.num}</span></div>
+    <div class="aip-row"><span class="aip-lbl">Balance</span><span class="aip-val" style="color:var(--cyan);font-weight:700;">${a.balance}</span></div>
+  `;
+}
+
+function loadAcctTxns(type){
+  const txns=accounts[type].txns;
+  const el=document.getElementById('acct-txns');
+  if(!el)return;
+  el.innerHTML=txns.map(t=>`
+    <div class="txn-row">
+      <div><div class="txn-date">${t.date}</div><div class="txn-date-sub">${t.time}</div></div>
+      <div><div class="txn-type-dot ${t.dir==='cr'?'dot-cr':'dot-db'}">${t.dir==='cr'?'↑':'↓'}</div></div>
+      <div><div class="txn-desc">${t.desc}</div><div class="txn-desc-sub">${t.sub}</div></div>
+      <div class="txn-amt ${t.dir}">${t.amt}</div>
+      <div class="txn-bal">${t.bal}</div>
+    </div>`).join('');
+}
+
+function setTxnTab(btn,mode){
+  document.querySelectorAll('.txn-tab').forEach(t=>t.classList.remove('act'));
+  btn.classList.add('act');
+  document.getElementById('custom-date-row').style.display=mode==='custom'?'':'none';
+}
+
+// ──── DASHBOARD TXNS ────
+function buildDashTxns(){
+  const el=document.getElementById('dash-txns');
+  if(!el)return;
+  const all=[...accounts.sav.txns,...accounts.biz.txns].slice(0,5);
+  el.innerHTML=all.map(t=>`
+    <div class="txi">
+      <div class="txii ${t.dir}">${t.dir==='cr'?'📥':'📤'}</div>
+      <div class="txi-b"><div class="txi-n">${t.desc}</div><div class="txi-s">${t.date} · ${t.sub}</div></div>
+      <div class="txi-a ${t.dir}">${t.amt}</div>
+    </div>`).join('');
+}
+
+// ──── ANALYTICS ────
+function buildAChart(){
+  const el=document.getElementById('a-chart');
+  if(!el)return;
+  const months=['Oct','Nov','Dec','Jan','Feb','Mar'];
+  const inc=[82,95,78,110,88,124],exp=[40,52,38,60,45,42];
+  const max=Math.max(...inc,...exp);
+  el.innerHTML=months.map((m,i)=>`
+    <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;">
+      <div style="display:flex;gap:2px;align-items:flex-end;width:100%;">
+        <div style="flex:1;height:${Math.round(inc[i]/max*105)}px;border-radius:4px 4px 0 0;background:linear-gradient(180deg,var(--cyan),rgba(0,212,255,.2))"></div>
+        <div style="flex:1;height:${Math.round(exp[i]/max*105)}px;border-radius:4px 4px 0 0;background:linear-gradient(180deg,var(--red),rgba(255,69,96,.2))"></div>
+      </div>
+      <div style="font-size:9px;color:var(--muted)">${m}</div>
+    </div>`).join('');
+}
+function buildATxns(){
+  const el=document.getElementById('a-txns');
+  if(!el)return;
+  const txns=[
+    {date:'19 Mar 2026',desc:'Salary Credit',type:'deposit',acct:'Savings ••4821',amt:'+₹95,000',dir:'cr'},
+    {date:'18 Mar 2026',desc:'Amazon Pay',type:'withdraw',acct:'Savings ••4821',amt:'-₹3,499',dir:'db'},
+    {date:'17 Mar 2026',desc:'Transfer from Priya K.',type:'transfer',acct:'Savings ••4821',amt:'+₹12,500',dir:'cr'},
+    {date:'16 Mar 2026',desc:'TNEB Electricity',type:'withdraw',acct:'Savings ••4821',amt:'-₹1,820',dir:'db'},
+    {date:'15 Mar 2026',desc:'Home Loan EMI',type:'withdraw',acct:'Savings ••4821',amt:'-₹18,450',dir:'db'},
+  ];
+  el.innerHTML=txns.map(t=>`<tr>
+    <td>${t.date}</td><td>${t.desc}</td>
+    <td><span class="chip ${t.dir==='cr'?'ch-act':'ch-rej'}">${t.type}</span></td>
+    <td style="color:var(--muted)">${t.acct}</td>
+    <td style="color:${t.dir==='cr'?'var(--green)':'var(--red)'};font-weight:700;">${t.amt}</td>
+    <td><span class="chip ch-act">Completed</span></td>
+  </tr>`).join('');
+}
+
+// ──── NUMPAD ────
+let numStr='';
+function np(v){
+  if(v==='C'){numStr='';}
+  else if(v==='⌫'){numStr=numStr.slice(0,-1);}
+  else{if(numStr.length<9) numStr+=v;}
+  const n=numStr?parseInt(numStr):0;
+  document.getElementById('amt-disp').textContent='₹'+n.toLocaleString('en-IN');
+  const i=document.getElementById('tf-amount');
+  if(i)i.value=n||'';
+}
+function syncAmt(){
+  const v=document.getElementById('tf-amount').value;
+  numStr=v;
+  document.getElementById('amt-disp').textContent=v?'₹'+parseInt(v).toLocaleString('en-IN'):'₹0';
+}
+function setTfTo(v){
+  document.getElementById('tf-to').value=v;
+}
+
+// ──── TRANSFER ────
+function doTransfer(){
+  const a=document.getElementById('tf-amount')?.value;
+  if(!a||a<=0){alert('Please enter a valid amount');return;}
+  showSuccess(`Transfer of ₹${parseInt(a).toLocaleString('en-IN')} initiated. Status: Completed`);
+  numStr='';document.getElementById('amt-disp').textContent='₹0';
+  if(document.getElementById('tf-amount')) document.getElementById('tf-amount').value='';
+}
+
+// ──── DEPOSIT ────
+function setDep(v){const i=document.getElementById('dep-amt');if(i)i.value=v;}
+function doDeposit(){
+  const i=document.getElementById('dep-amt');
+  if(!i||!i.value||i.value<=0){alert('Enter valid amount');return;}
+  showSuccess(`₹${parseInt(i.value).toLocaleString('en-IN')} deposited successfully!`);
+  i.value='';
+}
+
+// ──── DEPOSIT METHOD ────
+function selDep(el){
+  document.querySelectorAll('.dep-m').forEach(d=>d.classList.remove('sel'));
+  el.classList.add('sel');
+}
+
+// ──── MODALS ────
+function openModal(id){document.getElementById(id).classList.add('open');}
+function closeModal(id){document.getElementById(id).classList.remove('open');}
+document.querySelectorAll('.modal-bg').forEach(m=>m.addEventListener('click',e=>{if(e.target===m)m.classList.remove('open');}));
+function showSuccess(msg){
+  document.getElementById('succ-msg').textContent=msg||'Completed successfully.';
+  openModal('modal-success');
+}
+function openQT(name){
+  document.getElementById('qt-to-inp').value=name;
+  openModal('modal-qt');
+}
+
+// ──── AGE ────
+function calcAge(){
+  const d=new Date(document.getElementById('dob-in').value);
+  if(!d)return;
+  document.getElementById('age-out').value=Math.floor((new Date()-d)/31557600000)+' yrs';
+}
+
+// ──── BRANCH/IFSC ────
+const branches={
+  'SBI':['Anna Nagar|SBIN0004821','T. Nagar|SBIN0001234','Guindy|SBIN0005678'],
+  'HDFC Bank':['Anna Nagar|HDFC0000123','Adyar|HDFC0000456','Mylapore|HDFC0000789'],
+  'ICICI Bank':['T. Nagar|ICIC0000431','Velachery|ICIC0000872','OMR|ICIC0001234'],
+  'Axis Bank':['Guindy|UTIB0000821','Anna Nagar|UTIB0001010'],
+};
+function loadBranches(sel){
+  const bank=sel.value;
+  const bsel=document.getElementById('branch-sel');
+  const isel=document.getElementById('ifsc-out');
+  if(!bsel)return;
+  bsel.innerHTML='<option>Select Branch</option>';
+  (branches[bank]||[]).forEach(b=>{
+    const [name,ifsc]=b.split('|');
+    const o=document.createElement('option');
+    o.value=ifsc;o.textContent=name;
+    bsel.appendChild(o);
+  });
+  if(isel)isel.value='';
+}
+function loadIFSC(sel){
+  const i=document.getElementById('ifsc-out');
+  if(i)i.value=sel.value||'';
+}
+</script>
+</body>
+</html>
