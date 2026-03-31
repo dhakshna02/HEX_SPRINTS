@@ -50,4 +50,13 @@ public class GlobalExceptionHandler {
         map.put("message",e.getMessage());
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(map);
     }
+
+    @ExceptionHandler(NullPointerException.class)
+    public ResponseEntity<?> handleNullPointerException(
+            NullPointerException e
+    ){
+        Map<String,Object> map = new HashMap<>();
+        map.put("message","Invalid account or Account is not verified");
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(map);
+    }
 }

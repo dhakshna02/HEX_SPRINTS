@@ -27,7 +27,7 @@ public class CustomerService {
     private final UsersService usersService;
     private final PasswordEncoder passwordEncoder;
 
-
+    // creating new customer
     public void saveCustomer(@Valid CustomerDto customerDto) {
         Customers customers = CustomerMapper.CustomerDtoToCustomer(customerDto);
         customerRepository.save(customers);
@@ -38,8 +38,10 @@ public class CustomerService {
         return customerRepository.findById(l).orElseThrow(()-> new ResourceNotFound("Customer id is invalid"));
     }
 
+    // gett all account balance of one customer
     public List<MultiAccountBalanceDto> getAllAccountBalance(long id) {
-        Customers customers = customerRepository.findById(id).orElseThrow(()-> new ResourceNotFound("Invalid id given"));
+        Customers customers = customerRepository.findById(id).orElseThrow(()-> new ResourceNotFound("Invalid id given"));// need to change to getbyid beacuse it already exists why need to
+        // use that findbyid
 
        List<MultiAccountBalanceDto> multiAccountBalanceDtos = customerRepository.getAllAccountBalace(id);
 
@@ -48,6 +50,7 @@ public class CustomerService {
 
     }
 
+    // customer signup
     public void SaveCustomerSignUp(@Valid CustomerSignUpDto customerSignUpDto) {
             Users users = UserMapper.SignupDtoToEntity(customerSignUpDto);
             Customers customers = CustomerMapper.SignUpDtoToEntity(customerSignUpDto);
@@ -57,5 +60,15 @@ public class CustomerService {
             customers.setUsers(users1);
             customerRepository.save(customers);
 
+    }
+
+    // get the customer details
+    public CustomerDto getAllDetailsOfCustomer(long id) {
+
+        Customers customers = getById(id);
+
+        CustomerDto customerDto = CustomerMapper.CustomerToCustomerDto(customers);
+
+        return customerDto;
     }
 }

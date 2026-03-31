@@ -1,8 +1,10 @@
 package com.bank.MavericksBank.service;
 
+import com.bank.MavericksBank.dto.EmployeeDto;
 import com.bank.MavericksBank.dto.EmployeeSignUpDto;
 import com.bank.MavericksBank.dto.VerifyTheLoanDto;
 import com.bank.MavericksBank.enums.Role;
+import com.bank.MavericksBank.exceptions.ResourceNotFound;
 import com.bank.MavericksBank.mapper.EmployeeMapper;
 import com.bank.MavericksBank.mapper.UserMapper;
 import com.bank.MavericksBank.model.Employees;
@@ -21,7 +23,7 @@ public class EmployeeService {
     private final UsersService usersService;
 
     public Employees getById(long empid) {
-        return employeeRepository.findById(empid).orElseThrow(()-> new RuntimeException(" Employee id is invalid"));
+        return employeeRepository.findById(empid).orElseThrow(()-> new ResourceNotFound(" Employee id is invalid"));
     }
 
     public void addEmployee(EmployeeSignUpDto employeeSignUpDto) {
@@ -39,6 +41,11 @@ public class EmployeeService {
 
     }
 
+    // get employee details
+    public EmployeeDto getDetailsOfEmployee(long id) {
+        Employees employee = getById(id);
 
+        return  EmployeeMapper.emptoDto(employee);
+    }
 }
 // ipo empolyee the loan approve pana poraru so athu loan la varuma ila employee la varuma

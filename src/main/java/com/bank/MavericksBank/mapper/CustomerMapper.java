@@ -10,6 +10,7 @@ import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 
 import java.util.List;
+import java.util.Locale;
 
 @ControllerAdvice
 public class CustomerMapper {
@@ -46,5 +47,16 @@ public class CustomerMapper {
 
         return customers;
 
+    }
+
+    public static CustomerDto CustomerToCustomerDto(Customers customers) {
+        return new CustomerDto(
+                customers.getName(),
+                customers.getMobileNo(),
+                customers.getMailId(),
+                customers.getAddress(),
+                customers.getPanNo(),
+                customers.getAadharNo()
+        );
     }
 }

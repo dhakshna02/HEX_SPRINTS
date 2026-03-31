@@ -44,4 +44,10 @@ public class CustomerController {
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
+    // get customer info of customer for profile
+    @GetMapping("/cutomer-details/{id}")
+    public CustomerDto getAllDetailsOfCustomer(@PathVariable(value = "id") long id){
+        return customerService.getAllDetailsOfCustomer(id);
+    }
+
 }
