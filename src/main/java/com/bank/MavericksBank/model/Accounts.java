@@ -5,10 +5,7 @@ import com.bank.MavericksBank.enums.AccountStatus;
 import com.bank.MavericksBank.enums.AccountType;
 import com.fasterxml.jackson.databind.ser.std.StdKeySerializers;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.math.BigDecimal;
@@ -22,6 +19,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Getter
 @Setter
+@ToString
 public class Accounts {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

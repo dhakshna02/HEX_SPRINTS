@@ -11,7 +11,14 @@ public record AccountDto(
 
 
         AccountType accountType,
-        long customerId
+        String identityProof,
+        String addressProof,
+        String panNo,
+        String photograph,
+        String signature
+
+
+
 
 
 ) {

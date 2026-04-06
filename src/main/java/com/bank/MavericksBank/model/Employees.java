@@ -2,10 +2,7 @@ package com.bank.MavericksBank.model;
 
 import com.bank.MavericksBank.enums.Designation;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.IdentityHashMap;
 
@@ -15,6 +12,7 @@ import java.util.IdentityHashMap;
 @NoArgsConstructor
 @Getter
 @Setter
+@ToString
 public class Employees {
 
     @Id

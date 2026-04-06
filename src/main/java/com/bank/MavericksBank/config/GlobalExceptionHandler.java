@@ -1,5 +1,6 @@
 package com.bank.MavericksBank.config;
 
+import com.bank.MavericksBank.exceptions.AccountRemarksException;
 import com.bank.MavericksBank.exceptions.ResourceNotFound;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -59,4 +60,16 @@ public class GlobalExceptionHandler {
         map.put("message","Invalid account or Account is not verified");
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(map);
     }
+
+    @ExceptionHandler(AccountRemarksException.class)
+    public ResponseEntity<?> handleAccountRemarksException(
+            AccountRemarksException e
+    ){
+        Map<String,Object> map = new HashMap<>();
+        map.put("message",e.getMessage());
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(map);
+
+    }
+
+
 }

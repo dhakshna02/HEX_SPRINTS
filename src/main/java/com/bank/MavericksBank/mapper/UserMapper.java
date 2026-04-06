@@ -18,6 +18,7 @@ public class UserMapper {
     public static Users EmpSignupDtoToEntity(EmployeeSignUpDto employeeSignUpDto) {
         Users users = new Users();
         users.setUserName(employeeSignUpDto.userName());
+
         return users;
     }
 }

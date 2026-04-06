@@ -10,14 +10,15 @@ import jakarta.validation.Valid;
 public class LoanMapper {
     public static Loans LoanDtoToEntity(@Valid CreateLoanDto createLoanDto) {
     Loans loans = new Loans();
-    loans.setAccountType(createLoanDto.accountType());
-    loans.setAmount(createLoanDto.amount());
+    loans.setLoanType(createLoanDto.loanType());
+    loans.setRequestedLoanAmount(createLoanDto.requestedLoanAmount());
 
     return loans;
     }
 
     public static Loans VerifyLoanDtoToEntity(Loans loans,@Valid VerifyTheLoanDto verifyTheLoanDto) {
 
+        loans.setApprovedLoanAmount(verifyTheLoanDto.approvedLoanAmount());
         loans.setEmi(verifyTheLoanDto.emi());
         loans.setIntrestRate(verifyTheLoanDto.intrestRate());
         loans.setMonths(verifyTheLoanDto.monthsOfEmi());
@@ -29,8 +30,8 @@ public class LoanMapper {
     public  static GetLoanForEmployeeDto EntityToDto(Loans loans){
         return new GetLoanForEmployeeDto(
                 loans.getId(),
-                loans.getAccountType(),
-                loans.getAmount(),
+                loans.getLoanType(),
+                loans.getRequestedLoanAmount(),
                 loans.getIntrestRate(),
                 loans.getMonths(),
                 loans.getEmi(),

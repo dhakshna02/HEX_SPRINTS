@@ -1,16 +1,11 @@
 package com.bank.MavericksBank.model;
 
 
-import com.bank.MavericksBank.enums.AccountType;
-import com.bank.MavericksBank.enums.LoanStatus;
+import com.bank.MavericksBank.enums.*;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.math.BigDecimal;
-import java.util.IdentityHashMap;
 
 @Entity
 @Table(name = "loans")
@@ -18,6 +13,7 @@ import java.util.IdentityHashMap;
 @NoArgsConstructor
 @Getter
 @Setter
+@ToString
 public class Loans {
 
     @Id
@@ -25,10 +21,14 @@ public class Loans {
     private long id ;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "accout_type")
-    private AccountType accountType;
+    @Column(name = "loan_type")
+    private LoanType loanType;
 
-    private BigDecimal amount;
+    @Column(name = "requested_loan_amount")
+    private BigDecimal requestedLoanAmount;
+
+    @Column(name = "approved_loan_amount")
+    private BigDecimal approvedLoanAmount;
 
     @Column(name = "intrest_rate")
     private BigDecimal intrestRate;
@@ -41,13 +41,35 @@ public class Loans {
     @Column(name = "loan_status")
     private LoanStatus loanStatus;
 
+
+    @Enumerated(EnumType.STRING)
+    private RiskRating riskRating;
+
+    @Column(name = "financial_analyst_id")
+    private long financialAnalystId;
+
+    @Column(name = "asset_verifier_id")
+    private long assestVerifierId;
+
+    @Enumerated(EnumType.STRING)
+    private CustomerLoanDecision customerLoanDecision;
+
+
+
+
     @ManyToOne
     private Customers customers;
 
 
+
     @ManyToOne
-    @JoinColumn(name = "loan_approved_by_emp")
+    @JoinColumn(name = "loan_verifier")
     private Employees employees;
+
+
+
+
+
 
 
 }

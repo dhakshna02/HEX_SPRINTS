@@ -4,6 +4,7 @@ import com.bank.MavericksBank.dto.AccountDto;
 import com.bank.MavericksBank.dto.AccountInfoDto;
 import com.bank.MavericksBank.dto.AccountVerificationDto;
 import com.bank.MavericksBank.model.Accounts;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 
 @ControllerAdvice
@@ -23,4 +24,17 @@ public class AccountMapper {
                 account.getEmployees().getName()
         );
     }
+
+    public static Accounts accountDtoToEntity(@Valid AccountDto accountDto) {
+
+
+        Accounts accounts = new Accounts();
+
+        accounts.setAccountType(accountDto.accountType());
+
+        return accounts;
+    }
+
+
+
 }

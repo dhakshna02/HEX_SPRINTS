@@ -1,5 +1,6 @@
 package com.bank.MavericksBank.service;
 
+import com.bank.MavericksBank.dto.AccountDto;
 import com.bank.MavericksBank.dto.CustomerDto;
 import com.bank.MavericksBank.dto.CustomerSignUpDto;
 import com.bank.MavericksBank.dto.MultiAccountBalanceDto;
@@ -7,7 +8,6 @@ import com.bank.MavericksBank.enums.Role;
 import com.bank.MavericksBank.exceptions.ResourceNotFound;
 import com.bank.MavericksBank.mapper.CustomerMapper;
 import com.bank.MavericksBank.mapper.UserMapper;
-import com.bank.MavericksBank.model.Accounts;
 import com.bank.MavericksBank.model.Customers;
 import com.bank.MavericksBank.model.Users;
 import com.bank.MavericksBank.repository.CustomerRepository;
@@ -35,7 +35,7 @@ public class CustomerService {
 
     // get customers by id
     public Customers getById(long l) {
-        return customerRepository.findById(l).orElseThrow(()-> new ResourceNotFound("Customer id is invalid"));
+        return customerRepository.findById(l).orElseThrow(()-> new ResourceNotFound("Incalid Customer id"));
     }
 
     // gett all account balance of one customer
@@ -70,5 +70,23 @@ public class CustomerService {
         CustomerDto customerDto = CustomerMapper.CustomerToCustomerDto(customers);
 
         return customerDto;
+    }
+
+    public Customers getByUsername(String username) {
+
+        return customerRepository.getByUsername(username);
+    }
+
+    public void saveOtherNecessaryDetails(Customers customers, @Valid AccountDto accountDto) {
+
+         Customers customers1 = CustomerMapper.idProofInfoDtoToEntity(customers,accountDto);
+        customerRepository.save(customers1);
+    }
+
+    public void saveIncomeCertificate(Customers customers) {
+
+        System.out.println(customers);
+
+        customerRepository.save(customers);
     }
 }

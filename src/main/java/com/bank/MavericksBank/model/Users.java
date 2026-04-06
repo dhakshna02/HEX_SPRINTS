@@ -2,10 +2,7 @@ package com.bank.MavericksBank.model;
 
 import com.bank.MavericksBank.enums.Role;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.security.core.GrantedAuthority;
@@ -23,13 +20,14 @@ import java.util.List;
 @NoArgsConstructor
 @Getter
 @Setter
+@ToString
 public class Users implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id ;
 
-    @Column(name = "user_name")
+    @Column(name = "user_name",updatable = false,nullable = false)
     private String userName;
 
     private String password;

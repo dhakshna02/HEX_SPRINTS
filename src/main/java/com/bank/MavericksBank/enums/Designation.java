@@ -7,5 +7,7 @@ public enum Designation {
     DEPUTY_MANAGER,
     MANAGER,
     SENIOR_MANAGER,
-    BRANCH_MANAGER
+    BRANCH_MANAGER,
+    ASSET_VERIFIER,
+    FINACIAL_ANALYST
 }

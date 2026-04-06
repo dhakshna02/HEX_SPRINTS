@@ -5,16 +5,15 @@ import com.bank.MavericksBank.enums.LoanType;
 
 import java.math.BigDecimal;
 
-public record GetLoanForEmployeeDto(
-
-        long Loanid,
+public record LoanResponseDto(
+        long loanId,
         LoanType loanType,
-        BigDecimal LoanAmount,
-        BigDecimal intrestRate,
-        int LoanTotalMonths,
+        BigDecimal requestedLoanAmount,
+        BigDecimal approvedLoanAmount,
+        int months,
         BigDecimal emi,
-        LoanStatus loanStatus,
-        long customerId
+        LoanStatus loanStatus
+
 
 ) {
 }

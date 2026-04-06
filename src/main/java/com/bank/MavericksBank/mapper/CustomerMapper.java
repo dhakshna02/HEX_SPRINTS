@@ -1,16 +1,14 @@
 package com.bank.MavericksBank.mapper;
 
+import com.bank.MavericksBank.dto.AccountDto;
 import com.bank.MavericksBank.dto.CustomerDto;
 import com.bank.MavericksBank.dto.CustomerSignUpDto;
 import com.bank.MavericksBank.dto.MultiAccountBalanceDto;
 import com.bank.MavericksBank.model.Accounts;
 import com.bank.MavericksBank.model.Customers;
-import com.bank.MavericksBank.repository.CustomerRepository;
+import com.bank.MavericksBank.model.Remarks;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.ControllerAdvice;
-
-import java.util.List;
-import java.util.Locale;
 
 @ControllerAdvice
 public class CustomerMapper {
@@ -21,8 +19,7 @@ public class CustomerMapper {
                            customers.setMobileNo( customerDto.mobNumber());
                            customers.setMailId(customerDto.mailId());
                            customers.setAddress(customerDto.address());
-                           customers.setPanNo(customerDto.panNo());
-                           customers.setAadharNo(customerDto.aadharNo());
+
 
               return customers;
 
@@ -42,8 +39,12 @@ public class CustomerMapper {
         customers.setMobileNo(customerSignUpDto.mobNumber());
         customers.setMailId(customerSignUpDto.mailId());
         customers.setAddress(customerSignUpDto.address());
-        customers.setPanNo(customerSignUpDto.panNo());
-        customers.setAadharNo(customerSignUpDto.aadharNo());
+        customers.setDateOfBirth(customerSignUpDto.DOB());
+        customers.setGender(customerSignUpDto.gender());
+        customers.setOccupation(customerSignUpDto.occupation());
+        customers.setAnnualIncome(customerSignUpDto.annualIncome());
+
+
 
         return customers;
 
@@ -54,9 +55,17 @@ public class CustomerMapper {
                 customers.getName(),
                 customers.getMobileNo(),
                 customers.getMailId(),
-                customers.getAddress(),
-                customers.getPanNo(),
-                customers.getAadharNo()
-        );
+                customers.getAddress());
+    }
+
+    public static Customers idProofInfoDtoToEntity(Customers customers, @Valid AccountDto accountDto) {
+
+        customers.setIdentityProof(accountDto.identityProof());
+        customers.setAddressProof(accountDto.addressProof());
+        customers.setPanNo(accountDto.panNo());
+        customers.setPhotograph(accountDto.photograph());
+        customers.setSignature(accountDto.signature());
+
+        return customers;
     }
 }

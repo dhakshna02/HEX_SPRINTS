@@ -1,10 +1,10 @@
 package com.bank.MavericksBank.model;
 
+import com.bank.MavericksBank.enums.Gender;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "customers")
@@ -12,6 +12,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
+@ToString
 public class Customers {
 
     @Id
@@ -29,11 +30,35 @@ public class Customers {
     @Column(length = 1000)
     private String address;
 
+    @Column(name = "date_of_birth")
+    private LocalDate DateOfBirth;
+
+    @Enumerated(EnumType.STRING)
+    private Gender gender;
+
+    private String occupation;
+
+    @Column(name = "annual_income")
+    private long annualIncome;
+
+
+    @Column(name = "identity_proof")
+    private String identityProof;
+
+    @Column(name = "address_proof")
+    private String addressProof;
+
     @Column(name = "pan_no")
     private String panNo;
 
-    @Column(name = "aadhar_no")
-    private String aadharNo;
+    @Column(name = "income_certificate")
+    private Long incomeCertificate;
+
+    private String photograph;
+
+    private String signature;
+
+
 
     @OneToOne
     private  Users users;

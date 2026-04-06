@@ -8,12 +8,15 @@ import java.time.LocalDate;
 
 public record GettingAllUnfiredAccountsWithCustomerDetails(
 
-        long AccountNumber,
+        long cccountNumber,
         AccountType accountType,
         BigDecimal balance,
-        LocalDate AccountOpeningDate,
+        LocalDate acccountOpeningDate,
         AccountOpeningStatus accountOpeningStatus,
-        String CustomerName
+        String customerName,
+        String identityProof,
+        String addressProof,
+        String panNo
 
 ) {
 }

@@ -44,6 +44,8 @@ public class SecurityConfiguration {
                         .requestMatchers(HttpMethod.POST,"/api/customer/signup").permitAll()  // works good
                         .requestMatchers(HttpMethod.POST,"/api/employee/create").permitAll()// works good
                         .requestMatchers(HttpMethod.GET,"/api/auth/login").authenticated()// works good
+                        .requestMatchers(HttpMethod.POST,"/api/admin/add").permitAll()
+
 
                         // customer relate
                         .requestMatchers(HttpMethod.GET,"/api/customer/account-balance/{customerid}").hasAuthority("CUSTOMER")// works good
@@ -54,6 +56,10 @@ public class SecurityConfiguration {
                         .requestMatchers(HttpMethod.GET,"/api/account/get-all-unverified-account").hasAuthority("EMPLOYEE")//works good
                         .requestMatchers(HttpMethod.PUT,"/api/account/verification").hasAuthority("EMPLOYEE")// works good
                         .requestMatchers(HttpMethod.GET,"/api/account/account-details/{id}").authenticated()// works good
+                        .requestMatchers(HttpMethod.PUT,"/api/account/assign-emp-acct/admin/{aid}/{eid}").hasAuthority("ADMIN")
+                        .requestMatchers(HttpMethod.GET,"/api/account/get-all-unverified-account-with-username").hasAnyAuthority("EMPLOYEE","CUSTOMER")
+                        .requestMatchers(HttpMethod.PUT,"/api/account/reupload/{aid}").hasAuthority("CUSTOMER")
+
 
                         // employyee related
                         .requestMatchers(HttpMethod.GET,"/api/employee/get-emp-details/{id}").hasAuthority("EMPLOYEE")
@@ -62,7 +68,25 @@ public class SecurityConfiguration {
                         .requestMatchers(HttpMethod.POST,"/api/loan/create-loan").hasAuthority("CUSTOMER")// works good
                         .requestMatchers(HttpMethod.GET,"/api/loan/get-all-loan-pending").hasAuthority("EMPLOYEE") // works good
                         .requestMatchers(HttpMethod.PUT,"/api/loan/verify-loan").hasAuthority("EMPLOYEE")// works good
+                        .requestMatchers(HttpMethod.PUT,"/api/loan/assign-loan").hasAuthority("ADMIN")
+                        .requestMatchers(HttpMethod.GET,"/api/loan/all-cust-details").permitAll()
+                        .requestMatchers(HttpMethod.GET,"/api/loan/get-loans").authenticated()
+                        .requestMatchers(HttpMethod.PUT,"/api/loan/verify-and-riskRates").hasAuthority("EMPLOYEE")
+
+                        // Remarks related
+                        .requestMatchers(HttpMethod.POST,"/api/remarks/opening-remarks").hasAnyAuthority("CUSTOMER","EMPLOYEE")
+                        .requestMatchers(HttpMethod.GET,"/api/remarks/viewing-remarks/{aid}").hasAnyAuthority("CUSTOMER","EMPLOYEE")
+                        .requestMatchers(HttpMethod.POST,"/api/remarks/remarks/loan").hasAnyAuthority("CUSTOMER","EMPLOYEE")
+                        .requestMatchers(HttpMethod.GET,"/api/remarks/viewing-remarks-loan/{lid}").hasAnyAuthority("CUSTOMER","EMPLOYEE")
+
+
+                        // collatral
+                        .requestMatchers(HttpMethod.POST,"/api/collatral/addcollatral").hasAnyAuthority("CUSTOMER","EMPLOYEE")
+                        .requestMatchers(HttpMethod.GET,"/api/collatral/collatrals/{lid}").authenticated()
+                        .requestMatchers(HttpMethod.PUT,"/api/collatral/collatral-value").hasAuthority("EMPLOYEE")
+                        .anyRequest().permitAll()
                 );
+
                      http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
                     http.httpBasic(Customizer.withDefaults());
 

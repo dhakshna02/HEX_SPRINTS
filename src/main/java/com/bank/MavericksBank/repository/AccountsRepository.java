@@ -15,9 +15,14 @@ public interface AccountsRepository extends JpaRepository<Accounts,Long> {
             a.balance,
             a.openDate,
             a.accountOpeningStatus,
-            a.customers.name
+            a.customers.name,
+            a.customers.identityProof,
+            a.customers.addressProof,
+            a.customers.panNo
             from Accounts a
-            where a.accountOpeningStatus =?1
+            where a.employees.users.userName =?1 or a.customers.users.userName =?1
+            AND a.accountOpeningStatus =?2
+           
             """)
-    List<GettingAllUnfiredAccountsWithCustomerDetails> getAllUnverfiedAccounts(AccountOpeningStatus accountOpeningStatus);
+    List<GettingAllUnfiredAccountsWithCustomerDetails> getAllUnverfiedAccounts(String name, AccountOpeningStatus accountOpeningStatus);
 }

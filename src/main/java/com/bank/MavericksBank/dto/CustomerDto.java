@@ -25,17 +25,9 @@ public record CustomerDto(
         @NotBlank
         @NotNull
         @Size(min = 3 , max = 1000)
-        String address,
+        String address
 
-        @NotBlank
-        @NotNull
-        @Size(min = 3 , max = 255)
-        String panNo,
 
-        @NotBlank
-        @NotNull
-        @Size(min = 3 , max = 255)
-        String aadharNo
 ) {
 }
 
