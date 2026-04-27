@@ -2,6 +2,7 @@ package com.bank.MavericksBank.dto;
 
 public record LoanRemarksDto(
         String remarks,
-        long loanId
+        long loanId,
+        String CollatralStatus
 ) {
 }

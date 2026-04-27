@@ -8,7 +8,7 @@ import java.time.LocalDate;
 
 public record GettingAllUnfiredAccountsWithCustomerDetails(
 
-        long cccountNumber,
+        long acccountNumber,
         AccountType accountType,
         BigDecimal balance,
         LocalDate acccountOpeningDate,

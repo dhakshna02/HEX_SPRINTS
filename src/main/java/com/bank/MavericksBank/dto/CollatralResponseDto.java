@@ -6,9 +6,10 @@ import java.math.BigDecimal;
 
 public record CollatralResponseDto(
         long LoanId,
+        long collatralId,
         String collatralName,
         CollatralTypes collatralTypes,
-        BigDecimal collatralValye,
-        String collatralAddress
+        String collatralAddress,
+        String collatralDocument
 ) {
 }

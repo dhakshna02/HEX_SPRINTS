@@ -3,6 +3,7 @@ package com.bank.MavericksBank.controller;
 import com.bank.MavericksBank.dto.AccountPostRemarksDto;
 import com.bank.MavericksBank.dto.LoanRemarksDto;
 import com.bank.MavericksBank.dto.ViewRemarksDto;
+import com.bank.MavericksBank.enums.RemarkStatus;
 import com.bank.MavericksBank.service.RemarksService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -15,6 +16,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/remarks")
 @AllArgsConstructor
+@CrossOrigin("http://localhost:5173")
 public class RemarksController {
 
     private final RemarksService remarksService;
@@ -32,11 +34,17 @@ public class RemarksController {
     // viewing all the remarks
 
 
-    @GetMapping("/viewing-remarks/{aid}")
-    public List<ViewRemarksDto> viewingAllRemarks(Principal principal,
-                                                  @PathVariable(value = "aid") long aid){
-        return remarksService.viewingAllRemarks(aid,principal.getName());
+    @GetMapping("/viewing-remarks")
+    public List<ViewRemarksDto> viewingAllRemarks(Principal principal){
+        return remarksService.viewingAllRemarks(principal.getName());
     }
+
+    // view remarks of loans
+    @GetMapping("/viewing-loan-remakrs")
+    public List<ViewRemarksDto> viewingAllLoanRemarks(Principal principal){
+        return remarksService.viewingAllLoanRemarks(principal.getName());
+    }
+
 
 
     // adding remarks for the loan
@@ -55,4 +63,17 @@ public class RemarksController {
                                                   @PathVariable(value = "lid") long lid){
         return remarksService.viewingAllRemarksForLoan(lid,principal.getName());
     }
+
+
+    @PutMapping("/update-remarks/{status}/{id}")
+    public ResponseEntity<HttpStatus> UpadteRemarksStatus(@PathVariable(value = "status") RemarkStatus status,
+                                                            @PathVariable(value = "id") long id , Principal principal){
+          remarksService.UpadteRemarksStatus(status,id,principal.getName());
+
+          return ResponseEntity.status(HttpStatus.CREATED).build();
+    }
+
+
+
+
 }

@@ -3,19 +3,18 @@ package com.bank.MavericksBank.service;
 import com.bank.MavericksBank.dto.AccountPostRemarksDto;
 import com.bank.MavericksBank.dto.LoanRemarksDto;
 import com.bank.MavericksBank.dto.ViewRemarksDto;
-import com.bank.MavericksBank.enums.AccountOpeningStatus;
-import com.bank.MavericksBank.enums.AccountStatus;
-import com.bank.MavericksBank.enums.LoanStatus;
-import com.bank.MavericksBank.enums.Role;
+import com.bank.MavericksBank.enums.*;
 import com.bank.MavericksBank.exceptions.AccountRemarksException;
-import com.bank.MavericksBank.exceptions.ResourceNotFound;
+import com.bank.MavericksBank.mapper.RemarksMapper;
 import com.bank.MavericksBank.model.Accounts;
 import com.bank.MavericksBank.model.Loans;
 import com.bank.MavericksBank.model.Remarks;
 import com.bank.MavericksBank.model.Users;
+import com.bank.MavericksBank.repository.LoanRepository;
 import com.bank.MavericksBank.repository.RemarksReposiotry;
 import lombok.AllArgsConstructor;
-import org.springframework.security.core.userdetails.User;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -27,6 +26,7 @@ public class RemarksService {
     private final UsersService usersService;
     private final AccountService accountService;
     private final LoanService loanService;
+    private final LoanRepository loanRepository;
 
     // if the account is under verification and also checks the ownership of accont and the remarks
     public void createTheRemarksFromCustomerAndEmployee(AccountPostRemarksDto postRemarksDto, String name) {
@@ -67,31 +67,23 @@ public class RemarksService {
             remarks.setRole(user.getRole());
             remarks.setRemarks(postRemarksDto.remarks());
             remarks.setAccounts(accounts);
+            remarks.setRemarkStatus(RemarkStatus.ACTIVE);
 
 
             remarksReposiotry.save(remarks);
 
         }
 
-    public List<ViewRemarksDto> viewingAllRemarks(long aid, String name) {
+    public List<ViewRemarksDto> viewingAllRemarks( String name) {
 
         // verify the user holds the account
-      //  Users users = (Users) usersService.loadUserByUsername(name);
+       Users users = (Users) usersService.loadUserByUsername(name);
+        System.out.println(users);
+       List<Remarks> remarks = remarksReposiotry.viewingAllRemarks(users.getUsername(),RemarkStatus.ACTIVE);
 
-        Accounts accounts = accountService.getById(aid);
+        System.out.println(remarks);
+       return remarks.stream().map(RemarksMapper:: entToDto).toList();
 
-        if(accounts.getCustomers().getUsers().getRole().equals(Role.CUSTOMER)) {
-            if (!accounts.getCustomers().getUsers().getUsername().equals(name))
-                throw new AccountRemarksException("Account Owner mismatch");
-
-        }
-        if(accounts.getCustomers().getUsers().getRole().equals(Role.EMPLOYEE)) {
-
-            if (!accounts.getEmployees().getUsers().getUsername().equals(name))
-                throw new AccountRemarksException("Emplyee doesnt manage this account");
-
-        }
-         return  remarksReposiotry.viewingAllRemarks(aid);
 
     }
 
@@ -110,14 +102,6 @@ public class RemarksService {
             throw new AccountRemarksException("Account is already verified and remarks cannot be added");
 
 
-
-        if (user.getRole() == Role.CUSTOMER) {
-            if (!loans.getCustomers().getUsers().getUsername().equals(user.getUsername()))
-                throw new AccountRemarksException("This customer is not owner of this account");
-
-        }
-
-
         System.out.println(loans.toString());
 
         if (user.getRole().equals(Role.EMPLOYEE) ){
@@ -131,11 +115,18 @@ public class RemarksService {
             if (loans.getEmployees() == null) {
                 throw new AccountRemarksException("This account is not managed by this employee");
             }
+
         }
+
+
+        loans.setCollatralStatus(CollatralStatus.valueOf(loanRemarksDto.CollatralStatus()));
+
+        loanRepository.save(loans);
         System.out.println(user.getRole());
         Remarks remarks = new Remarks();
         remarks.setRole(user.getRole());
         remarks.setRemarks(loanRemarksDto.remarks());
+        remarks.setRemarkStatus(RemarkStatus.ACTIVE);
         remarks.setLoans(loans);
 
 
@@ -168,5 +159,32 @@ public class RemarksService {
         }
         return  remarksReposiotry.viewingAllRemarksForLoan(lid);
 
+    }
+
+    public void  UpadteRemarksStatus(RemarkStatus status, long id, String name) {
+
+
+        Remarks remarks = remarksReposiotry.findById(id).orElseThrow(()-> new AccountRemarksException("Account is invalid"));
+
+        if((remarks.getAccounts() == null ||
+                !remarks.getAccounts().getCustomers().getUsers().getUsername().equals(name))
+                &&
+                (remarks.getLoans() == null ||
+                        !remarks.getLoans().getCustomers().getUsers().getUsername().equals(name)))
+            throw new AccountRemarksException("account is not valid");
+        remarks.setRemarkStatus(status);
+
+        remarksReposiotry.save(remarks);
+    }
+
+    public List<ViewRemarksDto> viewingAllLoanRemarks(String name) {
+
+        // verify the user holds the account
+        Users users = (Users) usersService.loadUserByUsername(name);
+        System.out.println(users);
+        List<Remarks> remarks = remarksReposiotry.viewingAllLoanRemarks(users.getUsername(),RemarkStatus.ACTIVE);
+
+        System.out.println(remarks);
+        return remarks.stream().map(RemarksMapper:: entToDto).toList();
     }
 }

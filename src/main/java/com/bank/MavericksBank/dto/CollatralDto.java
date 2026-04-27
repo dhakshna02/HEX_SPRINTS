@@ -6,6 +6,7 @@ public record CollatralDto(
         long LoanId,
         String collatralName,
         CollatralTypes collatralTypes,
-        String collatralAddress
+        String collatralAddress,
+        String collatralDocument
 ) {
 }

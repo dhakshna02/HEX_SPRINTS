@@ -2,8 +2,11 @@ package com.bank.MavericksBank.mapper;
 
 import com.bank.MavericksBank.dto.EmployeeDto;
 import com.bank.MavericksBank.dto.EmployeeSignUpDto;
+import com.bank.MavericksBank.dto.ManagerDto;
 import com.bank.MavericksBank.model.Employees;
 import lombok.AllArgsConstructor;
+
+import java.util.List;
 
 
 public class EmployeeMapper {
@@ -26,4 +29,15 @@ public class EmployeeMapper {
                 employee.getDesignation()
         );
     }
+
+    public static ManagerDto EmpToDto(Employees employees) {
+
+        return new ManagerDto(
+                employees.getId(),
+                employees.getName()
+        );
+
+    }
+
+
 }

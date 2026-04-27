@@ -1,5 +1,7 @@
 package com.bank.MavericksBank.enums;
 
 public enum TranscationType {
-    DEBIT,CREDIT
+    DEPOSIT,
+    WITHDRAW,
+    BANK_TRANSFER
 }

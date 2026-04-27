@@ -1,9 +1,6 @@
 package com.bank.MavericksBank.service;
 
-import com.bank.MavericksBank.dto.AccountDto;
-import com.bank.MavericksBank.dto.CustomerDto;
-import com.bank.MavericksBank.dto.CustomerSignUpDto;
-import com.bank.MavericksBank.dto.MultiAccountBalanceDto;
+import com.bank.MavericksBank.dto.*;
 import com.bank.MavericksBank.enums.Role;
 import com.bank.MavericksBank.exceptions.ResourceNotFound;
 import com.bank.MavericksBank.mapper.CustomerMapper;
@@ -27,7 +24,7 @@ public class CustomerService {
     private final UsersService usersService;
     private final PasswordEncoder passwordEncoder;
 
-    // creating new customer
+    // creating new customer  v1
     public void saveCustomer(@Valid CustomerDto customerDto) {
         Customers customers = CustomerMapper.CustomerDtoToCustomer(customerDto);
         customerRepository.save(customers);
@@ -50,7 +47,7 @@ public class CustomerService {
 
     }
 
-    // customer signup
+    // customer signup v2
     public void SaveCustomerSignUp(@Valid CustomerSignUpDto customerSignUpDto) {
             Users users = UserMapper.SignupDtoToEntity(customerSignUpDto);
             Customers customers = CustomerMapper.SignUpDtoToEntity(customerSignUpDto);
@@ -88,5 +85,83 @@ public class CustomerService {
         System.out.println(customers);
 
         customerRepository.save(customers);
+    }
+
+    public NameDto getName(String name) {
+
+        Customers customer = customerRepository.getByUsername(name);
+
+       // System.out.println(customer);
+        return new NameDto(
+                customer.getName()
+        );
+    }
+
+    public void UploadIdenityProof(IdentityProofUploadDto identityProofUploadDto, String name) {
+
+        Users user = (Users) usersService.loadUserByUsername(name);
+
+        Customers customer = customerRepository.getByUsername(name);
+
+        customer.setIdentityProof(identityProofUploadDto.identityProof());
+
+        customerRepository.save(customer);
+
+    }
+
+    public void UploadAddressProof(AddressProofUploadDtp addressProofUploadDtp, String name) {
+
+
+        Users user = (Users) usersService.loadUserByUsername(name);
+
+        Customers customer = customerRepository.getByUsername(name);
+
+        customer.setAddressProof(addressProofUploadDtp.AddressProof());
+
+        customerRepository.save(customer);
+
+
+    }
+
+    public void UploadPan(PanUploadDto panUploadDto, String name) {
+
+        Users user = (Users) usersService.loadUserByUsername(name);
+
+        Customers customer = customerRepository.getByUsername(name);
+
+        customer.setPanNo(panUploadDto.pan());
+
+        customerRepository.save(customer);
+    }
+
+    public void UploadPhoto(PhotoUploadDto photoUploadDto, String name) {
+
+        Users user = (Users) usersService.loadUserByUsername(name);
+
+        Customers customer = customerRepository.getByUsername(name);
+
+        customer.setPhotograph(photoUploadDto.photo());
+
+        customerRepository.save(customer);
+    }
+
+    public void uploadSignature(@Valid SignatureAndAccountTypeDto signatureAndAccountTypeDto, String name) {
+
+        Customers customers = customerRepository.getByUsername(name);
+
+        customers.setSignature(signatureAndAccountTypeDto.signature());
+        customerRepository.save(customers);
+    }
+
+    public void uploadSign(SignatureUploadDto signatureUploadDto, String name) {
+        Users user = (Users) usersService.loadUserByUsername(name);
+
+        Customers customer = customerRepository.getByUsername(name);
+
+        customer.setSignature(signatureUploadDto.signature());
+
+        customerRepository.save(customer);
+
+
     }
 }

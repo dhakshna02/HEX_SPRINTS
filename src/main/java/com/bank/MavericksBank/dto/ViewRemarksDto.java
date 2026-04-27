@@ -3,7 +3,7 @@ package com.bank.MavericksBank.dto;
 import com.bank.MavericksBank.enums.Role;
 
 public record ViewRemarksDto(
-        Role  role,
+       long id ,
         String remarks
 ) {
 }

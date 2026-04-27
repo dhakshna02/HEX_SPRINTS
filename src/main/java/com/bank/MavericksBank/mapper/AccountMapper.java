@@ -1,8 +1,6 @@
 package com.bank.MavericksBank.mapper;
 
-import com.bank.MavericksBank.dto.AccountDto;
-import com.bank.MavericksBank.dto.AccountInfoDto;
-import com.bank.MavericksBank.dto.AccountVerificationDto;
+import com.bank.MavericksBank.dto.*;
 import com.bank.MavericksBank.model.Accounts;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -36,5 +34,55 @@ public class AccountMapper {
     }
 
 
+    public static GettingAllUnfiredAccountsWithCustomerDetails AccountToAccOpeningDto(Accounts accounts) {
 
+        return  new GettingAllUnfiredAccountsWithCustomerDetails(
+                accounts.getId(),
+                accounts.getAccountType(),
+                accounts.getBalance(),
+                accounts.getOpenDate(),
+                accounts.getAccountOpeningStatus(),
+                accounts.getCustomers().getName(),
+                accounts.getCustomers().getIdentityProof(),
+                accounts.getCustomers().getAddressProof(),
+                accounts.getCustomers().getPanNo()
+        );
+    }
+
+    public static AccountInfoDtos AccountToDtoForWidget(Accounts account) {
+        return new AccountInfoDtos(
+                account.getId(),
+                account.getCustomers().getName(),
+                account.getAccountType(),
+                account.getBalance(),
+                account.getAccountStatus(),
+                account.getOpenDate(),
+                account.getAccountBranch(),
+                account.getIFSC(),
+                account.getAccountOpeningStatus().toString()
+
+        );
+    }
+
+    public static AccountsForDepositAndWithDrawDto AccountToDtoForDepositWidget(Accounts accounts) {
+
+        return new AccountsForDepositAndWithDrawDto(
+                accounts.getId(),
+                accounts.getAccountType().toString()
+        );
+    }
+
+    public static GettingAllUnfiredAccountsWithCustomerDetails acctEntToDto(Accounts accounts) {
+        return  new GettingAllUnfiredAccountsWithCustomerDetails(
+                accounts.getId(),
+                accounts.getAccountType(),
+                accounts.getBalance(),
+                accounts.getOpenDate(),
+                accounts.getAccountOpeningStatus(),
+                accounts.getCustomers().getName(),
+                accounts.getCustomers().getIdentityProof(),
+                accounts.getCustomers().getAddressProof(),
+                accounts.getCustomers().getPanNo()
+        );
+    }
 }

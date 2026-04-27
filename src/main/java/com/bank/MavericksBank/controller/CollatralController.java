@@ -16,6 +16,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/collatral")
 @AllArgsConstructor
+@CrossOrigin("http://localhost:5173")
 public class CollatralController {
     private final CollatralService collatralService;
 
@@ -29,7 +30,7 @@ public class CollatralController {
     }
 
     @GetMapping("/collatrals/{lid}")
-    public List<CollatralResponseDto> getCollatrals(@PathVariable(value = "lid") long lid,
+    public CollatralResponseDto getCollatrals(@PathVariable(value = "lid") long lid,
                                                     Principal principal){
         return collatralService.getCollatrals(lid,principal.getName());
     }
@@ -41,4 +42,9 @@ public class CollatralController {
         return ResponseEntity.status(HttpStatus.CREATED).build();
 
     }
+
+
+
+
+
 }

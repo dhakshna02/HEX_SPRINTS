@@ -5,7 +5,7 @@ import com.bank.MavericksBank.model.Employees;
 
 public record AccountVerificationDto(
         AccountOpeningStatus accountApprovedStatus,
-        long accountid,
-        long empid
+        long accountid
+
         ) {
 }

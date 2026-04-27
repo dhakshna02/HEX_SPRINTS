@@ -52,7 +52,7 @@ public class Customers {
     private String panNo;
 
     @Column(name = "income_certificate")
-    private Long incomeCertificate;
+    private String incomeCertificate;
 
     private String photograph;
 

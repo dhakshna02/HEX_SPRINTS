@@ -6,6 +6,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "loans")
@@ -54,17 +55,22 @@ public class Loans {
     @Enumerated(EnumType.STRING)
     private CustomerLoanDecision customerLoanDecision;
 
-
-
-
     @ManyToOne
     private Customers customers;
 
+    @Enumerated(EnumType.STRING)
+    private CollatralStatus collatralStatus;
 
+
+    @Column(name = "loan_balance")
+    private BigDecimal LoanBalance;
 
     @ManyToOne
     @JoinColumn(name = "loan_verifier")
     private Employees employees;
+
+    @Column(name = "approved_at")
+    private LocalDate approvedAt;
 
 
 

@@ -3,15 +3,20 @@ package com.bank.MavericksBank.service;
 import com.bank.MavericksBank.dto.CollatralDto;
 import com.bank.MavericksBank.dto.CollatralResponseDto;
 import com.bank.MavericksBank.dto.CollatralValueDto;
+import com.bank.MavericksBank.dto.CreateLoanDto;
+import com.bank.MavericksBank.enums.Designation;
+import com.bank.MavericksBank.enums.LoanStatus;
 import com.bank.MavericksBank.exceptions.AccountRemarksException;
 import com.bank.MavericksBank.mapper.CollatralMapper;
 import com.bank.MavericksBank.model.Collatral;
+import com.bank.MavericksBank.model.Employees;
 import com.bank.MavericksBank.model.Loans;
 import com.bank.MavericksBank.model.Users;
 import com.bank.MavericksBank.repository.CollatralRepository;
+import com.bank.MavericksBank.repository.EmployeeRepository;
+import com.bank.MavericksBank.repository.LoanRepository;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
-import lombok.Setter;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,17 +26,22 @@ import java.util.List;
 public class CollatralService {
     private final CollatralRepository collatralRepository;
     private  final UsersService usersService;
-    private final LoanService loanService;
+    private final LoanRepository loanRepository;
+    private final EmployeeRepository employeeRepository;
 
     public void addCollatral(CollatralDto collatralDto, String name) {
 
 
         Users users = (Users) usersService.loadUserByUsername(name);
         System.out.println(collatralDto.LoanId());
-        Loans loans = loanService.getById(collatralDto.LoanId());
+        Loans loans = loanRepository.getById(collatralDto.LoanId());
         System.out.println(loans);
         if(!loans.getCustomers().getUsers().getUsername().equals(users.getUsername()))
             throw new AccountRemarksException("This acoount is not hold by thsi user");
+        if(!loans.getLoanStatus().equals(LoanStatus.PENDING))
+            throw new AccountRemarksException("This account already onGoing so collatral cant be added");
+
+
 
         Collatral collatral = CollatralMapper.CollatralDtoToEnt(collatralDto);
         collatralRepository.save(collatral);
@@ -39,12 +49,13 @@ public class CollatralService {
 
     }
 
-    public List<CollatralResponseDto> getCollatrals(long lid, String name) {
+    public CollatralResponseDto getCollatrals(long lid, String name) {
 
-        Loans loans = loanService.getById(lid);
+        Loans loans = loanRepository.findById(lid).orElseThrow(()->new AccountRemarksException("Account is invalid"));
 
-        if(!loans.getCustomers().getUsers().getUsername().equals(name))
-            throw  new AccountRemarksException("Account is not hold by this customer");
+        Employees emp = employeeRepository.findById(loans.getAssestVerifierId()).orElseThrow(()->new AccountRemarksException("invalid user"));
+        if(!emp.getDesignation().equals(Designation.ASSET_VERIFIER))
+            throw  new AccountRemarksException("Account is not hold by this employee");
 
 
         return collatralRepository.getAllCollatralsById(lid);
@@ -55,7 +66,7 @@ public class CollatralService {
 
    Users users = (Users) usersService.loadUserByUsername(name);
 
-   Loans loans = loanService.getById(collatralValueDto.loanId());
+
 
    // need to chanfge the user table - if time perimists to that dhakshna dont forget
 
@@ -65,4 +76,15 @@ public class CollatralService {
         collatral.setCollatralValye(collatralValueDto.collatralValue());
         collatralRepository.save(collatral);
    }
+
+    public void addCollatralInCreateLoan(@Valid CreateLoanDto createLoanDto, Loans loans) {
+
+
+        Collatral collatral = CollatralMapper.CollatralDtooInLoanToEnity(createLoanDto );
+        collatral.setLoans(loans);
+
+        collatralRepository.save(collatral);
+
+
+    }
 }

@@ -12,7 +12,7 @@ public record LoanCustomerDto(
         String identityProof,
         String addressProof,
         String panNo,
-        Long incomeCertificate,
+        String incomeCertificate,
         String photograph
 
 ) {

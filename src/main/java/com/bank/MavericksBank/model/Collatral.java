@@ -2,10 +2,7 @@ package com.bank.MavericksBank.model;
 
 import com.bank.MavericksBank.enums.CollatralTypes;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.math.BigDecimal;
 
@@ -15,6 +12,7 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @Getter
 @Setter
+@ToString
 public class Collatral {
 
     @Id
@@ -29,6 +27,9 @@ public class Collatral {
     private BigDecimal collatralValye;
 
     private String collatralAddress;
+
+    @Column(name = "collatral_doucment")
+    private String collatralDocument;
 
     @ManyToOne
     private Loans loans;

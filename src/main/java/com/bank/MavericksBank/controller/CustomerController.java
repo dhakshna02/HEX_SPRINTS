@@ -1,9 +1,7 @@
 package com.bank.MavericksBank.controller;
 
 
-import com.bank.MavericksBank.dto.CustomerDto;
-import com.bank.MavericksBank.dto.CustomerSignUpDto;
-import com.bank.MavericksBank.dto.MultiAccountBalanceDto;
+import com.bank.MavericksBank.dto.*;
 import com.bank.MavericksBank.model.Customers;
 import com.bank.MavericksBank.service.CustomerService;
 import jakarta.validation.Valid;
@@ -13,12 +11,15 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.naming.Name;
 import java.math.BigDecimal;
+import java.security.Principal;
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/customer")
 @AllArgsConstructor
+@CrossOrigin("http://localhost:5173")
 public class CustomerController {
 
     private final CustomerService customerService;
@@ -49,5 +50,15 @@ public class CustomerController {
     public CustomerDto getAllDetailsOfCustomer(@PathVariable(value = "id") long id){
         return customerService.getAllDetailsOfCustomer(id);
     }
+
+
+
+    @GetMapping("/name")
+    public NameDto getName(Principal principal){
+        return customerService.getName(principal.getName());
+    }
+
+
+
 
 }

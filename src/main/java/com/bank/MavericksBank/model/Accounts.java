@@ -52,6 +52,12 @@ public class Accounts {
     @ManyToOne
     private Customers customers;
 
+    @Column(name = "account_branch")
+    private String AccountBranch;
+
+    @Column(name = "ifsc")
+    private String IFSC;
+
 
     @ManyToOne
     @JoinColumn(name = "account_verified_by_employee")

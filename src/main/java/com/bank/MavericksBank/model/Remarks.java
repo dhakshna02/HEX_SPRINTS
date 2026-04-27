@@ -1,5 +1,6 @@
 package com.bank.MavericksBank.model;
 
+import com.bank.MavericksBank.enums.RemarkStatus;
 import com.bank.MavericksBank.enums.Role;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -27,6 +28,9 @@ public class Remarks {
     @JoinColumn(name = "account_id")
     private Accounts accounts;
 
+    @Enumerated(EnumType.STRING)
+    @Column(name = "remark_status")
+    private RemarkStatus remarkStatus;
     @ManyToOne
     @JoinColumn(name="loan_id")
     private Loans loans;
