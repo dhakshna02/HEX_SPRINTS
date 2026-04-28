@@ -1,0 +1,34 @@
+.admin-sidebar {
+  height: 100vh;
+  background: #121212;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* nav item */
+.sb-ni {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px;
+  color: #777;
+  text-decoration: none;
+  border-radius: 8px;
+  transition: 0.2s;
+}
+
+.sb-ni:hover {
+  background: rgba(255,255,255,0.05);
+  color: #fff;
+}
+
+.sb-ni.active {
+  background: rgba(0,212,255,0.12);
+  color: #00d4ff;
+  border-left: 3px solid #00d4ff;
+}
+
+.sb-ni-ic {
+  font-size: 16px;
+}

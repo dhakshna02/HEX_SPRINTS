@@ -1,0 +1,47 @@
+.stat-card {
+  background: linear-gradient(145deg, #121212, #0e0e0e);
+  border-radius: 16px;
+  padding: 22px;
+  border: 1px solid rgba(255,255,255,0.05);
+  transition: all 0.25s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+/* glow accent line */
+.stat-card::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: #00d4ff;
+  opacity: 0.2;
+  transition: 0.3s;
+}
+
+/* hover */
+.stat-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 30px rgba(0,212,255,0.15);
+}
+
+.stat-card:hover::after {
+  opacity: 1;
+}.stat-label {
+  font-size: 11px;
+  color: rgba(0, 212, 255, 0.6);
+  letter-spacing: 1.5px;
+  margin-bottom: 6px;
+  text-transform: uppercase;
+}
+
+/* 🔥 VALUE = highlight */
+.stat-value {
+  font-size: 28px;
+  font-weight: 800;
+  background: linear-gradient(90deg, #00d4ff, #4facfe);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}

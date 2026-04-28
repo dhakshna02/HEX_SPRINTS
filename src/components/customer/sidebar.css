@@ -1,0 +1,179 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+
+/* ===== FULL HEIGHT FIX ===== */
+.row.min-vh-100 {
+    display: flex;
+    align-items: stretch;
+    margin: 0 !important;
+}
+
+.col-sm-3 {
+    padding: 0 !important;
+    display: flex;
+    flex-direction: column;
+}
+
+.col-sm-3 > div {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ===== SIDEBAR WRAPPER ===== */
+.sb-wrapper {
+    width: 240px;
+    flex: 1;
+    background: #111111;
+    border-right: 1px solid rgba(255, 255, 255, 0.08);
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 20px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+/* ===== LOGO ===== */
+.sb-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 20px 18px 18px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.sb-icon {
+    width: 34px;
+    height: 34px;
+    border-radius: 9px;
+    background: #00d4ff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 14px;
+    color: #000;
+    flex-shrink: 0;
+}
+
+.sb-name {
+    font-size: 15px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #f2f2f2;
+}
+
+/* ===== SECTION ===== */
+.sb-sec {
+    padding: 18px 10px 0;
+}
+
+.sb-lbl {
+    font-size: 9.5px;
+    font-weight: 700;
+    color: #444;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 0 8px 8px;
+    display: block;
+}
+
+/* ===== NAV ITEM ===== */
+.sb-ni {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    padding: 18px 12px;
+    border-radius: 9px;
+    font-size: 18px;
+    font-weight: 500;
+    color: #666666;
+    cursor: pointer;
+    transition: all 0.14s;
+    margin-bottom: 1px;
+    border-left: 2px solid transparent;
+    border-top: none;
+    border-right: none;
+    border-bottom: none;
+    background: transparent;
+    width: 100%;
+    text-align: left;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    text-decoration: none;
+}
+
+.sb-ni:link,
+.sb-ni:visited {
+    text-decoration: none;
+    color: #666;
+}
+
+.sb-ni:hover {
+    color: #f2f2f2;
+    background: rgba(255, 255, 255, 0.04);
+    text-decoration: none;
+}
+
+.sb-ni.active {
+    background: rgba(0, 212, 255, 0.10);
+    color: #00d4ff;
+    border-left-color: #00d4ff;
+    font-weight: 600;
+}
+
+/* ===== ICON INSIDE NAV ITEM ===== */
+.sb-ni-ic {
+    font-size: 25px;
+    width: 18px;
+    text-align: center;
+    opacity: 0.8;
+}
+
+.sb-ni.active .sb-ni-ic {
+    opacity: 1;
+}
+
+/* ===== BADGE ===== */
+.sb-ni-badge {
+    margin-left: auto;
+    background: #ff4560;
+    color: #fff;
+    font-size: 9px;
+    font-weight: 700;
+    border-radius: 20px;
+    padding: 2px 7px;
+}
+
+/* ===== LOGOUT ===== */
+.sb-bottom {
+    margin-top: auto;
+    padding: 0 10px;
+}
+
+.sb-logout {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    padding: 10px 12px;
+    border-radius: 9px;
+    font-size: 13px;
+    font-weight: 500;
+    color: #ff4560;
+    cursor: pointer;
+    transition: all 0.14s;
+    background: transparent;
+    border: none;
+    width: 100%;
+    text-align: left;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+.sb-logout:hover {
+    background: rgba(255, 69, 96, 0.08);
+}
+
+/* ===== SECTION WRAPPER ===== */
+.sb-section {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+}

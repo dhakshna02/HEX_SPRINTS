@@ -1,0 +1,47 @@
+.transfer-type {
+  display: flex;
+  gap: 12px;
+  background: #1e293b; /* card background */
+  padding: 8px;
+  border-radius: 12px;
+  width: fit-content;
+}
+
+/* Base button */
+.transfer-btn {
+  padding: 10px 18px;
+  border: none;
+  border-radius: 10px;
+  background: transparent;
+  color: #94a3b8;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+/* Hover effect */
+.transfer-btn:hover {
+  color: #e2e8f0;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+/* Active (selected) button */
+.transfer-btn.active {
+  background: linear-gradient(135deg, #3b82f6, #6366f1);
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+}
+
+/* Optional: click feel */
+.transfer-btn:active {
+  transform: scale(0.97);
+}
+.error-box {
+  margin-top: 10px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.4);
+  color: #f87171;
+  font-size: 13px;
+}

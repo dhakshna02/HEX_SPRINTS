@@ -1,0 +1,29 @@
+.action-box {
+  margin-top: 20px;
+  padding: 18px;
+  border-radius: 14px;
+  background: #020617;
+  border: 1px solid rgba(255,255,255,0.08);
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.action-box:hover {
+  border-color: #22d3ee;
+  background: rgba(34, 211, 238, 0.08);
+}
+
+.active-box {
+  border-color: #22d3ee;
+  box-shadow: 0 0 8px rgba(34,211,238,0.6);
+}
+
+.action-box-content h6 {
+  color: #e2e8f0;
+  margin-bottom: 4px;
+}
+
+.action-box-content p {
+  color: #94a3b8;
+  font-size: 13px;
+}

@@ -1,0 +1,20 @@
+/* loan-approval.css or sidebar CSS file */
+
+.loan-layout {
+    display: flex;
+    gap: 1rem;
+}
+
+/* Sidebar should be fixed small width */
+.sidebar {
+    width: 220px;          /* fixed width */
+    min-width: 220px;      /* prevent shrinking */
+    max-width: 220px;      /* prevent growing */
+    flex-shrink: 0;        /* don't let flexbox shrink it */
+}
+
+/* Main content takes remaining space */
+.loan-container-dark {
+    flex: 1;               /* takes all remaining width */
+    overflow-y: auto;
+}

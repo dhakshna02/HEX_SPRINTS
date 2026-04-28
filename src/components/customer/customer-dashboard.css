@@ -1,0 +1,49 @@
+/* CARD */
+.stat-card {
+  background: #121212;
+  border-radius: 16px;
+  padding: 20px;
+  border: 1px solid rgba(255,255,255,0.06);
+  transition: 0.2s ease;
+}
+
+/* hover glow */
+.stat-card:hover {
+  border-color: rgba(0,212,255,0.3);
+  box-shadow: 0 0 20px rgba(0,212,255,0.08);
+}
+
+/* LABEL */
+.stat-label {
+  font-size: 11px;
+  color: #777;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+
+/* VALUE */
+.stat-value {
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+/* CHANGE */
+.stat-change {
+  font-size: 12px;
+}
+
+/* COLORS */
+.text-cyan {
+  color: #00d4ff;
+}
+
+.text-green {
+  color: #00e676;
+}
+
+.text-red {
+  color: #ff4d6d;
+}.text-beige {
+    color: #f5cba7;
+}

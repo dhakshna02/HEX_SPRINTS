@@ -1,0 +1,196 @@
+.transfer-card {
+  width: 100%;
+  max-width: 800px;
+  background: #1e293b;
+  padding: 24px;
+  border-radius: 16px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.35);
+  color: #e2e8f0;
+}
+
+/* Title */
+.card-title {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 18px;
+}
+
+/* Input group */
+.input-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 14px;
+}
+
+.input-group label {
+  font-size: 13px;
+  margin-bottom: 6px;
+  color: #94a3b8;
+}
+
+/* Inputs */
+.input-group input,
+.input-group textarea {
+  background: #0f172a;
+  border: 1px solid #334155;
+  border-radius: 10px;
+  padding: 10px 12px;
+  color: #e2e8f0;
+  font-size: 14px;
+  outline: none;
+  transition: all 0.25s ease;
+}
+
+/* Focus effect */
+.input-group input:focus,
+.input-group textarea:focus {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+}
+
+/* Textarea */
+.input-group textarea {
+  resize: none;
+  height: 70px;
+}
+
+/* Submit button */
+.transfer-submit {
+  width: 100%;
+  margin-top: 10px;
+  padding: 12px;
+  border: none;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #3b82f6, #6366f1);
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+/* Hover */
+.transfer-submit:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(59, 130, 246, 0.35);
+}
+
+/* Click feel */
+.transfer-submit:active {
+  transform: scale(0.97);
+}
+.transfer-card {
+  width: 100%;
+  height: 100%;              /* fill parent height */
+  background: #1e293b;
+  padding: 24px;
+  border-radius: 16px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.35);
+  color: #e2e8f0;
+
+  display: flex;
+  flex-direction: column;
+}
+
+/* Make form take full space */
+.transfer-card form {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+/* Inputs spacing grows nicely */
+.input-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 16px;
+  width: 100%;
+}
+
+/* Make inputs stretch full */
+.input-group input,
+.input-group textarea {
+  width: 100%;
+}
+
+/* Push button to bottom (nice UX) */
+.transfer-submit {
+  margin-top: auto;
+}
+.input-group input:focus,
+.input-group textarea:focus {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.25),
+              0 0 10px rgba(59, 130, 246, 0.15);
+  background: #020617;
+}
+.input-group {
+  padding: 6px;
+  border-radius: 12px;
+  transition: all 0.25s ease;
+}
+
+.input-group:focus-within {
+  background: rgba(59, 130, 246, 0.08);
+  box-shadow: 0 0 0 1px rgba(59, 130, 246, 0.25),
+              0 4px 12px rgba(59, 130, 246, 0.15);
+}.input-group input,
+.input-group textarea {
+  transition: all 0.25s ease;
+}
+.input-group:hover {
+  background: rgba(255, 255, 255, 0.03);
+}input:focus-visible {
+  outline: none;
+}
+.transfer-card {
+  width: 100%;
+  background: #1e293b;
+  padding: 24px;
+  border-radius: 16px;
+  color: #e2e8f0;
+  transition: all 0.3s ease;
+}
+
+/* 🔥 Glow when ANY input inside is focused */
+.transfer-card:focus-within {
+  box-shadow: 
+    0 0 0 1px rgba(59, 130, 246, 0.4),
+    0 10px 30px rgba(59, 130, 246, 0.25),
+    0 0 40px rgba(59, 130, 246, 0.15);
+
+  transform: translateY(-2px);
+  background: #172554; /* slight blue tint */
+}.transfer-card:hover {
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+}.transfer-card * {
+  transition: all 0.25s ease;
+}
+/* Match your dark inputs */
+.transfer-input {
+  width: 100%;
+  background: #0f172a;
+  border: 1px solid #334155;
+  border-radius: 10px;
+  padding: 10px 12px;
+  color: #e2e8f0;
+  font-size: 14px;
+  outline: none;
+  transition: all 0.25s ease;
+
+  appearance: none; /* remove default styling */
+}
+
+/* Focus glow */
+.transfer-input:focus {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+}
+
+/* Dropdown arrow fix */
+.transfer-input {
+  background-image: url("data:image/svg+xml;utf8,<svg fill='%23e2e8f0' height='20' viewBox='0 0 20 20' width='20' xmlns='http://www.w3.org/2000/svg'><path d='M5 7l5 5 5-5H5z'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 16px;
+  padding-right: 35px;
+}

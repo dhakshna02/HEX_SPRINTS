@@ -1,0 +1,343 @@
+
+/* ===== CONTAINER (same tone as login card) ===== */
+.table-container {
+    background: linear-gradient(145deg, #0f172a, #020617);
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 
+        0 0 30px rgba(34,211,238,0.12),
+        inset 0 0 12px rgba(255,255,255,0.02);
+}
+
+/* ===== TABLE BASE ===== */
+.custom-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #020617; /* darker like input fields */
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+/* ===== HEADER ===== */
+.custom-table thead {
+    background: #020617;
+    color: #64748b; /* muted gray-blue */
+    font-size: 12px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.custom-table th {
+    padding: 14px;
+    text-align: left;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+
+/* ===== BODY ===== */
+.custom-table td {
+    padding: 14px;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    color: #000000; /* FIX: no more black text */
+}
+
+/* ===== ROW HOVER (match login glow style) ===== */
+.custom-table tbody tr:hover {
+    background: rgba(34,211,238,0.06);
+    box-shadow: inset 0 0 10px rgba(34,211,238,0.05);
+    transition: 0.25s ease;
+}
+
+/* ===== STATUS ===== */
+.status {
+    color: #facc15;
+    font-weight: 500;
+}
+
+/* ===== BUTTONS (MATCH LOGIN BUTTON STYLE BUT SOFTER) ===== */
+
+/* Approve */
+.btn-approve {
+    background: linear-gradient(135deg, #22d3ee, #0ea5e9);
+    color: black;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 10px;
+    font-weight: 500;
+
+    box-shadow: 0 0 10px rgba(34,211,238,0.25);
+    transition: 0.2s;
+}
+
+.btn-approve:hover {
+    background: linear-gradient(135deg, #22d3ee, #0284c7);
+    box-shadow: 0 0 15px rgba(34,211,238,0.4);
+}
+
+/* Reject */
+.btn-reject {
+    background: transparent;
+    border: 1px solid #ef4444;
+    color: #ef4444;
+    padding: 8px 16px;
+    border-radius: 10px;
+    transition: 0.2s;
+}
+
+.btn-reject:hover {
+    background: rgba(239,68,68,0.08);
+}
+
+/* Remarks */
+.btn-remarks {
+    background: transparent;
+    border: 1px solid rgba(148,163,184,0.5);
+    color: #cbd5f5;
+    padding: 6px 12px;
+    border-radius: 6px;
+}
+
+.btn-remarks:hover {
+    background: rgba(255,255,255,0.04);
+}
+
+/* ===== BADGE ===== */
+.badge-type {
+    background: rgba(34,211,238,0.12);
+    color: #22d3ee;
+    padding: 5px 10px;
+    border-radius: 8px;
+    font-size: 13px;
+}
+
+/* ===== CONTAINER ===== */
+.deposit-container {
+  padding: 24px;
+}
+
+/* ===== HEADER ===== */
+.deposit-header h4 {
+  color: #e2e8f0;
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.deposit-header p {
+  color: #94a3b8;
+  font-size: 13px;
+  margin-top: 4px;
+}
+
+/* ===== MAIN ===== */
+.deposit-main {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* ===== CARD ===== */
+.deposit-card {
+  background: #0f172a;
+  border-radius: 18px;
+  padding: 22px;
+  border: 1px solid rgba(255,255,255,0.06);
+  transition: all 0.25s ease;
+}
+
+.deposit-card:hover {
+  border-color: rgba(34,211,238,0.4);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+/* ===== INFO ROW ===== */
+.deposit-info-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.deposit-info-row span:first-child {
+  color: #94a3b8;
+  font-size: 13px;
+}
+
+.deposit-info-row span:last-child {
+  color: #e2e8f0;
+  font-weight: 500;
+}
+
+/* ===== STATUS ===== */
+.status-success {
+  color: #22c55e;
+  font-weight: 600;
+}
+
+/* ===== GRID ===== */
+.deposit-row-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+/* ===== SECTION ===== */
+.deposit-info h6 {
+  color: #e2e8f0;
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+
+/* ===== PREVIEW BOX ===== */
+.preview-box {
+  background: #020617;
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 12px;
+  padding: 10px;
+  text-align: center;
+  transition: 0.3s;
+}
+
+.preview-box:hover {
+  border-color: #22d3ee;
+}
+
+/* ===== IMAGE ===== */
+.preview-img {
+  width: 100%;
+  max-height: 220px;
+  object-fit: contain;
+  border-radius: 10px;
+}
+
+/* ===== PAN TEXT ===== */
+.deposit-note {
+  color: #cbd5f5;
+  font-size: 14px;
+  background: #020617;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.05);
+}
+
+/* ===== INPUT ===== */
+.deposit-input {
+  width: 100%;
+  background: #020617;
+  border: 1px solid rgba(255,255,255,0.08);
+  color: #e2e8f0;
+  padding: 12px;
+  border-radius: 10px;
+  margin-top: 10px;
+}
+
+.deposit-input:focus {
+  border-color: #22d3ee;
+  outline: none;
+}
+
+/* ===== BUTTONS ===== */
+.deposit-btn {
+  background: linear-gradient(135deg, #22d3ee, #0ea5e9);
+  border: none;
+  padding: 12px 18px;
+  border-radius: 10px;
+  color: black;
+  font-weight: 600;
+  transition: 0.2s;
+}
+
+.deposit-btn:hover {
+  transform: translateY(-1px);
+  opacity: 0.9;
+}
+
+/* APPROVE */
+.btn-approve {
+  background: #16a34a;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 8px;
+  color: white;
+  font-weight: 500;
+}
+
+.btn-approve:hover {
+  background: #15803d;
+}
+
+/* REJECT */
+.btn-reject {
+  background: #dc2626;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 8px;
+  color: white;
+}
+
+.btn-reject:hover {
+  background: #b91c1c;
+}
+
+/* ===== REMARK BOX ===== */
+.alert {
+  border-radius: 10px;
+  padding: 10px;
+  font-size: 13px;
+}
+
+/* ===== SCROLL FIX (optional) ===== */
+.table-container {
+  overflow-x: auto;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .deposit-row-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Center the card vertically */
+.row.min-vh-100 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Make card proper size */
+.row.min-vh-100 .card {
+  width: 100%;
+  max-width: 600px;
+}
+
+/* Center text inside card */
+.row.min-vh-100 .card-body {
+  text-align: center;
+  padding: 40px;
+}
+/* Center the card */
+.row.min-vh-100 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Card size */
+.row.min-vh-100 .card {
+  width: 100%;
+  max-width: 600px;
+  background: #121212; /* dark background to match your theme */
+}
+
+/* Text styling */
+.row.min-vh-100 .card-body {
+  text-align: center;
+  padding: 40px;
+}
+
+/* 🔥 Make text visible */
+.row.min-vh-100 .card-body h2 {
+  color: #ffffff;       /* pure white */
+  font-size: 28px;      /* bigger */
+  font-weight: 600;     /* bold */
+  letter-spacing: 0.5px;
+}

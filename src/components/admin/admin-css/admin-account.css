@@ -1,0 +1,115 @@
+.assign-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+/* CARD */
+.assign-card {
+  background: #1e293b;
+  color: #e2e8f0;
+  padding: 18px;
+  border-radius: 16px;
+  width: 100%;
+  max-width: 380px;
+  transition: all 0.3s ease;
+  border: 1px solid #334155;
+}
+
+/* 🔥 HOVER EFFECT (highlight) */
+.assign-card:hover {
+  transform: translateY(-6px);
+  background: #243047;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
+  border-color: #3b82f6;
+}
+
+/* HEADER */
+.assign-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.assign-type {
+  background: #334155;
+  padding: 4px 10px;
+  border-radius: 8px;
+  font-size: 12px;
+}
+
+.assign-icon {
+  font-size: 20px;
+}
+
+/* TEXT */
+.assign-name {
+  margin-top: 10px;
+  font-size: 16px;
+}
+
+.assign-balance {
+  margin: 6px 0;
+  font-size: 22px;
+  color: #38bdf8;
+}
+
+.assign-number {
+  font-size: 13px;
+  color: #94a3b8;
+}
+
+/* ACTION */
+.assign-action {
+  margin-top: 14px;
+  display: flex;
+  gap: 10px;
+}
+
+/* SELECT */
+.assign-select {
+  flex: 1;
+  background: #0f172a;
+  color: #e2e8f0;
+  border: 1px solid #334155;
+  padding: 8px;
+  border-radius: 8px;
+}
+
+/* BUTTON */
+.assign-btn {
+  background: linear-gradient(135deg, #3b82f6, #6366f1);
+  border: none;
+  color: #fff;
+  padding: 8px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.25s;
+}
+
+.assign-btn:hover {
+  opacity: 0.9;
+}
+.pagination-container {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.page-btn {
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    background: #fff;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.page-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.page-info {
+    font-size: 13px;
+}

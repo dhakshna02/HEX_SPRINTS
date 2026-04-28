@@ -1,0 +1,160 @@
+/* ───────── BODY ───────── */
+body {
+  background: #0a0a0a;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+/* ───────── TOPBAR ───────── */
+.topbar {
+  height: 75px;
+  background: #111111;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+/* ───────── SEARCH BAR ───────── */
+.search-bar {
+   
+  width: 380px;
+  background: #1a1a1a;
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 25px;
+  padding: 8px 14px;
+  gap: 8px;
+}
+
+.search-bar input {
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #f2f2f2;
+  font-size: 13px;
+  width: 100%;
+}
+
+.search-bar input::placeholder {
+  color: #555;
+}
+
+.search-icon {
+   
+  font-size: 14px;
+  color: #555;
+}
+
+/* ───────── BELL ───────── */
+.bell {
+  position: relative;
+  font-size: 18px;
+  color: #666;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.bell:hover {
+  color: #fff;
+}
+
+/* notification dot */
+.bell-dot {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 6px;
+  height: 6px;
+  background: #00d4ff;
+  border-radius: 50%;
+  border: 2px solid #111;
+}
+
+/* ───────── USER ───────── */
+.user-area {
+  cursor: pointer;
+}
+
+.user-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: #f2f2f2;
+}
+
+.user-role {
+  font-size: 10px;
+  color: #00d4ff;
+  font-weight: 600;
+}
+
+/* avatar */
+.user-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #00d4ff, #007c99);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #000;
+  font-weight: 700;
+  font-size: 13px;
+  border: 2px solid rgba(255,255,255,0.08);
+}
+
+/* ───────── ALIGNMENT FIX ───────── */
+.topbar .search-bar {
+  margin-left: 10px;
+}
+
+.sb-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 20px 18px 18px;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+.sb-icon {
+  width: 54px;
+  height: 34px;
+  border-radius: 9px;
+  background: #00d4ff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 14px;
+  color: #000;
+  flex-shrink: 0;
+}
+.sb-namek {
+  font-size: 20px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #f2f2f2;
+}
+
+/* CENTER SEARCH PROPERLY */
+.search-container {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+/* SEARCH BAR */
+.search-bar {
+  width: 380px;
+  background: #1a1a1a;
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 25px;
+  padding: 8px 14px;
+  gap: 8px;
+}
+
+/* ICON */
+.search-icon {
+  font-size: 14px;
+  color: #555;
+}
+
+/* SEARCH POSITIONING */
+.search-container {
+  margin-left: 405px;   /* 👈 this is your exact requirement */
+}

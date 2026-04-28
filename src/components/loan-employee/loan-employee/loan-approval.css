@@ -1,0 +1,133 @@
+/* Wrapper */
+.loan-wrapper-dark {
+  background: #0f172a;
+  min-height: 100vh;
+  color: #e2e8f0;
+}
+
+/* Layout */
+.loan-layout {
+  display: flex;
+}
+
+.loan-container-dark {
+  flex: 1;
+  padding: 30px;
+}
+
+/* Title */
+.loan-title-dark {
+  font-size: 26px;
+  margin-bottom: 20px;
+  color: #e2e8f0;
+}
+
+/* Section */
+.loan-section-dark {
+  background: #1e293b;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 12px;
+}
+
+/* Grid */
+.grid-2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+/* Highlight section */
+.highlight-dark {
+  border-left: 4px solid #3b82f6;
+}
+
+/* Important box */
+.important-box-dark {
+  background: rgba(59, 130, 246, 0.1);
+  padding: 15px;
+  border-radius: 10px;
+}
+
+/* Big text */
+.highlight-text-dark {
+  font-size: 22px;
+  font-weight: bold;
+  color: #3b82f6;
+}
+
+/* Table */
+.loan-table-dark {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.loan-table-dark th,
+.loan-table-dark td {
+  padding: 12px;
+  border-bottom: 1px solid #334155;
+}
+
+.loan-table-dark th {
+  color: #94a3b8;
+  text-align: left;
+}
+
+/* Image */
+.loan-image-dark {
+  width: 100%;
+  max-height: 300px;
+  object-fit: contain;
+  border-radius: 10px;
+  border: 1px solid #334155;
+}
+
+/* Actions */
+.action-bar-dark {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+}
+
+/* Grid layout */
+.approve-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px;
+  margin-top: 10px;
+}
+
+/* Input container */
+.input-group-dark {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Label */
+.input-group-dark label {
+  font-size: 13px;
+  color: #94a3b8;
+  margin-bottom: 6px;
+}
+
+/* Input field */
+.input-group-dark input {
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid #334155;
+  background: #0f172a;
+  color: #e2e8f0;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+/* Focus effect */
+.input-group-dark input:focus {
+  border-color: #3b82f6;
+  box-shadow: 0 0 8px rgba(59, 130, 246, 0.3);
+}
+
+/* Hover */
+.input-group-dark input:hover {
+  border-color: #475569;
+}

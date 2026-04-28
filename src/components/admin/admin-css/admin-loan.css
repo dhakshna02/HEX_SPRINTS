@@ -1,0 +1,88 @@
+.assign-action-vertical {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.assign-field select {
+  width: 100%;
+  padding: 8px;
+  border-radius: 6px;
+}
+
+/* container */
+.assign-action-vertical {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-top: 12px;
+}
+
+/* each field */
+.assign-field {
+  position: relative;
+}
+
+/* select box */
+.assign-field select {
+  width: 100%;
+  padding: 10px 14px;
+  border-radius: 10px;
+
+  background: linear-gradient(145deg, #0f172a, #020617);
+  color: #e2e8f0;
+
+  border: 1px solid #1e293b;
+  outline: none;
+
+  font-size: 14px;
+  font-weight: 500;
+
+  transition: all 0.25s ease;
+  cursor: pointer;
+}
+
+/* hover effect */
+.assign-field select:hover {
+  border-color: #0ea5e9;
+  box-shadow: 0 0 8px rgba(14, 165, 233, 0.2);
+}
+
+/* focus glow */
+.assign-field select:focus {
+  border-color: #22c55e;
+  box-shadow: 0 0 10px rgba(34, 197, 94, 0.3);
+}
+
+/* dropdown options */
+.assign-field select option {
+  background: #020617;
+  color: #e2e8f0;
+  padding: 10px;
+}
+
+/* assign button upgrade */
+.assign-btn {
+  margin-top: 8px;
+  padding: 10px;
+  border-radius: 10px;
+
+  background: linear-gradient(135deg, #22c55e, #16a34a);
+  color: white;
+  font-weight: 600;
+
+  border: none;
+  cursor: pointer;
+
+  transition: all 0.25s ease;
+}
+
+.assign-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(34, 197, 94, 0.4);
+}
+
+.assign-btn:active {
+  transform: scale(0.97);
+}

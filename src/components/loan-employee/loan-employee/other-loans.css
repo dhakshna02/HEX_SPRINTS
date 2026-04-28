@@ -1,0 +1,128 @@
+/* ===== PAGE ===== */
+.loan-page {
+  background: #020617;
+  min-height: 100vh;
+}
+
+/* ===== LAYOUT ===== */
+.loan-layout {
+  display: flex;
+}
+
+/* ===== CONTENT ===== */
+.loan-content {
+  flex: 1;
+  padding: 24px;
+}
+
+/* ===== MAIN CARD (same as deposit-card) ===== */
+.loan-card {
+  background: #0f172a;
+  border-radius: 18px;
+  padding: 22px;
+  border: 1px solid rgba(255,255,255,0.06);
+  transition: 0.25s ease;
+}
+
+.loan-card:hover {
+  border-color: rgba(34,211,238,0.4);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+/* ===== SUB CARD (same as preview/input box) ===== */
+.loan-subcard {
+  background: #020617;
+  border-radius: 12px;
+  padding: 14px;
+  border: 1px solid rgba(255,255,255,0.08);
+  transition: 0.2s;
+}
+
+.loan-subcard:hover {
+  border-color: #22d3ee;
+}
+
+/* ===== HEADINGS ===== */
+.loan-card h5,
+.loan-card h6 {
+  color: #e2e8f0;
+  margin-bottom: 10px;
+}
+
+/* ===== TEXT ===== */
+.loan-card p,
+.loan-subcard p {
+  color: #cbd5f5;
+  font-size: 14px;
+  margin-bottom: 6px;
+}
+
+/* ===== LABEL ===== */
+.loan-group label {
+  color: #94a3b8;
+  font-size: 13px;
+  margin-bottom: 6px;
+  display: block;
+}
+
+/* ===== INPUT (exact deposit-input clone) ===== */
+.loan-input {
+  width: 100%;
+  background: #020617;
+  border: 1px solid rgba(255,255,255,0.08);
+  color: #e2e8f0;
+  padding: 12px;
+  border-radius: 10px;
+}
+
+.loan-input:focus {
+  border-color: #22d3ee;
+  outline: none;
+}
+
+/* ===== IMAGE (same as preview) ===== */
+.loan-img {
+  width: 100%;
+  max-height: 250px;
+  object-fit: contain;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.08);
+  background: #020617;
+  padding: 8px;
+}
+
+/* ===== SECTION TITLE ===== */
+.loan-section-title {
+  color: #e2e8f0;
+  font-size: 15px;
+  margin-bottom: 10px;
+}
+
+/* ===== BADGE (same style as yours) ===== */
+.loan-badge {
+  background: rgba(34,211,238,0.12);
+  color: #22d3ee;
+  padding: 4px 10px;
+  border-radius: 8px;
+  font-size: 12px;
+}
+
+/* ===== STATUS COLORS ===== */
+.status-pending {
+  color: #facc15;
+}
+
+.status-active {
+  color: #22c55e;
+}
+
+.status-danger {
+  color: #ef4444;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .loan-layout {
+    flex-direction: column;
+  }
+}

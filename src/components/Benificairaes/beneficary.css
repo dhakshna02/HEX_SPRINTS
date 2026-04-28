@@ -1,0 +1,15 @@
+.btn-container {
+  margin-top: 20px;   /* 🔹 pulls it closer to IFSC */
+}
+
+/* OPTIONAL: reduce button width if too long */
+.transfer-submit {
+  width: 100%;        /* keep full if you like */
+  max-width: 400px;   /* 🔹 prevents it from stretching too much */
+}
+.transfer-card {
+    /* 🔥 control width */
+  width: 100%;
+  margin: 0 auto;       /* 🔥 center horizontally */
+  padding: 25px;
+}

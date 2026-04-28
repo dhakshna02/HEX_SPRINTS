@@ -1,0 +1,192 @@
+/* ===== ACCOUNT CARD (same theme as stat-card) ===== */
+.account-card {
+  position: relative;
+  background: #121212;
+  border-radius: 16px;
+  padding: 20px;
+  border: 1px solid rgba(255,255,255,0.06);
+  transition: 0.2s ease;
+  overflow: hidden;
+}
+
+/* ===== SUBTLE CORNER GLOW (premium look) ===== */
+.account-card::after {
+  content: "";
+  position: absolute;
+  top: -30px;
+  right: -30px;
+  width: 100px;
+  height: 100px;
+  background: radial-gradient(circle, rgba(0,212,255,0.18), transparent 70%);
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+/* ===== HOVER (same as stat-card feel) ===== */
+.account-card:hover {
+  border-color: rgba(0,212,255,0.25);
+  transform: translateY(-3px);
+}
+
+/* ===== BADGES ===== */
+.badge {
+  font-size: 10px;
+  padding: 4px 8px;
+  border-radius: 6px;
+  letter-spacing: 1px;
+}
+
+.savings {
+  background: rgba(0,212,255,0.1);
+  color: #00d4ff;
+}
+
+.business {
+  background: rgba(168,85,247,0.1);
+  color: #a855f7;
+}
+
+/* ===== TOP ===== */
+.card-top {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+/* ===== ICON BOX ===== */
+.icon-box {
+  background: rgba(255,255,255,0.05);
+  border-radius: 10px;
+  padding: 8px;
+}
+
+/* ===== TEXT ===== */
+.acc-name {
+  font-size: 15px;
+  color: #ccc;
+  margin-top: 8px;
+}
+
+.acc-balance {
+  font-size: 26px;
+  font-weight: 700;
+  margin: 8px 0;
+}
+
+.acc-number {
+  font-size: 12px;
+  color: #777;
+}
+
+/* ===== META ===== */
+.acc-meta {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.acc-meta small {
+  font-size: 10px;
+  color: #777;
+}
+
+.acc-meta p {
+  margin: 0;
+  font-size: 13px;
+}
+
+/* ===== BUTTONS (same dashboard style) ===== */
+.acc-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.btn-cyan {
+  flex: 1;
+  background: rgba(0,212,255,0.12);
+  color: #00d4ff;
+  border: none;
+  padding: 8px;
+  border-radius: 8px;
+  transition: 0.15s;
+}
+
+.btn-cyan:hover {
+  background: rgba(0,212,255,0.2);
+}
+
+.btn-dark {
+  flex: 1;
+  background: #1e293b;
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.08);
+  padding: 8px;
+  border-radius: 8px;
+  transition: 0.15s;
+}
+
+.btn-dark:hover {
+  background: #2b3648;
+}
+
+/* ===== ADD CARD ===== */
+.add-card {
+  border: 1px dashed rgba(255,255,255,0.2);
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.add-circle {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 1px dashed rgba(255,255,255,0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  color: #777;
+}
+
+/* ===== BUTTON WRAPPER ===== */
+.acc-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+/* ===== COMMON BUTTON STYLE ===== */
+.acc-actions button {
+  flex: 1;                  /* same width */
+  padding: 10px 0;         /* same height */
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  border: none;
+  transition: 0.2s ease;
+}
+
+/* ===== DETAILS BUTTON ===== */
+.btn-outline {
+  background: rgba(0,212,255,0.12);
+  color: #00d4ff;
+  border: 1px solid rgba(0,212,255,0.25);
+}
+
+.btn-outline:hover {
+  background: rgba(0,212,255,0.2);
+}
+
+/* ===== TRANSFER BUTTON ===== */
+.btn-dark {
+  background: #1e293b;
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.08);
+}
+
+.btn-dark:hover {
+  background: #2b3648;
+}
